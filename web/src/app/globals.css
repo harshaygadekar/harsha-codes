@@ -1,0 +1,175 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+/* Light — polished secondary target */
+:root {
+  --background: #f7f7fb;
+  --foreground: #0c0b1a;
+  --card: #ffffff;
+  --card-foreground: #0c0b1a;
+  --popover: #ffffff;
+  --popover-foreground: #0c0b1a;
+  --primary: #2f2fe4;
+  --primary-foreground: #ffffff;
+  --secondary: #e8e7f5;
+  --secondary-foreground: #162e93;
+  --muted: #eceaf6;
+  --muted-foreground: #5c5c72;
+  --accent: #e8e7f5;
+  --accent-foreground: #1a1953;
+  --destructive: #dc2626;
+  --border: #e2e0ee;
+  --input: #e2e0ee;
+  --ring: #2f2fe4;
+  --surface: #ffffff;
+  --surface-elevated: #ffffff;
+  --radius: 0.625rem;
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 8px 24px rgba(22, 46, 147, 0.06);
+  --banner-glow: radial-gradient(
+      120% 80% at 20% 40%,
+      rgba(47, 47, 228, 0.18),
+      transparent 55%
+    ),
+    radial-gradient(
+      90% 70% at 80% 20%,
+      rgba(22, 46, 147, 0.14),
+      transparent 50%
+    ),
+    linear-gradient(135deg, #e8e7f5 0%, #f7f7fb 50%, #dfe2f5 100%);
+}
+
+/* Dark — charcoal / zinc surfaces; brand blue only on primary CTAs */
+.dark {
+  --background: #09090b; /* zinc-950 */
+  --foreground: #fafafa;
+  --card: #18181b; /* zinc-900 */
+  --card-foreground: #fafafa;
+  --popover: #18181b;
+  --popover-foreground: #fafafa;
+  --primary: #2f2fe4;
+  --primary-foreground: #ffffff;
+  --secondary: #27272a; /* zinc-800 */
+  --secondary-foreground: #fafafa;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa; /* zinc-400 */
+  --accent: #27272a;
+  --accent-foreground: #fafafa;
+  --destructive: #ef4444;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #2f2fe4;
+  --surface: #18181b;
+  --surface-elevated: #1c1c1f;
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 8px 24px rgba(0, 0, 0, 0.45);
+  --banner-glow: radial-gradient(
+      120% 80% at 15% 50%,
+      rgba(47, 47, 228, 0.18),
+      transparent 55%
+    ),
+    radial-gradient(
+      90% 70% at 85% 30%,
+      rgba(63, 63, 70, 0.45),
+      transparent 50%
+    ),
+    linear-gradient(135deg, #18181b 0%, #09090b 50%, #0c0c0e 100%);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--primary) 35%, transparent);
+    color: var(--foreground);
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+}
+
+@layer utilities {
+  .surface-matte {
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .pixel-grid {
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.04) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 6px 6px;
+  }
+
+  .external-mark::after {
+    content: "↗";
+    margin-left: 0.25em;
+    font-size: 0.85em;
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,95 @@
+import { Star } from "lucide-react";
+import { portfolio } from "@/content/portfolio";
+import {
+  contributionChartUrl,
+  fetchGitHubRepos,
+  type GitHubRepo,
+} from "@/lib/github";
+import { Section } from "@/components/layout/section";
+import { ExternalLink } from "@/components/layout/external-link";
+
+export async function GitHubSection() {
+  const username = portfolio.githubUsername;
+  const repos = await fetchGitHubRepos(username);
+  const chartUrl = contributionChartUrl(username);
+
+  return (
+    <Section
+      id="github"
+      title="GitHub activity"
+      description="Recent public work and contribution cadence."
+    >
+      <div className="surface-matte overflow-x-auto rounded-xl p-4 sm:p-6">
+        <p className="mb-3 text-xs text-muted-foreground">
+          Contribution graph ·{" "}
+          <ExternalLink
+            href={`https://github.com/${username}`}
+            className="hover:text-foreground"
+          >
+            @{username}
+          </ExternalLink>
+        </p>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={chartUrl}
+          alt={`GitHub contribution chart for ${username}`}
+          className="mx-auto h-auto w-full max-w-3xl opacity-90 dark:opacity-100"
+          loading="lazy"
+          width={720}
+          height={112}
+        />
+      </div>
+
+      {repos.length > 0 ? (
+        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {repos.map((repo) => (
+            <RepoCard key={repo.id} repo={repo} />
+          ))}
+        </ul>
+      ) : (
+        <p className="mt-6 text-sm text-muted-foreground">
+          Live repo list unavailable right now.{" "}
+          <ExternalLink
+            href={`https://github.com/${username}`}
+            className="text-foreground hover:underline"
+          >
+            Browse on GitHub
+          </ExternalLink>
+          .
+        </p>
+      )}
+    </Section>
+  );
+}
+
+function RepoCard({ repo }: { repo: GitHubRepo }) {
+  return (
+    <li className="surface-matte rounded-xl p-4 transition-transform duration-200 hover:-translate-y-0.5">
+      <ExternalLink
+        href={repo.html_url}
+        showMark={false}
+        className="flex h-full flex-col gap-2 focus-visible:rounded-lg"
+      >
+        <div className="flex items-start justify-between gap-2">
+          <span className="font-medium tracking-tight text-foreground">
+            {repo.name}
+          </span>
+          <span className="inline-flex items-center gap-1 font-mono text-xs text-muted-foreground">
+            <Star className="size-3" aria-hidden />
+            {repo.stargazers_count}
+          </span>
+        </div>
+        {repo.description ? (
+          <p className="line-clamp-2 text-sm text-muted-foreground">
+            {repo.description}
+          </p>
+        ) : null}
+        {repo.language ? (
+          <p className="mt-auto pt-1 font-mono text-xs text-muted-foreground">
+            {repo.language}
+          </p>
+        ) : null}
+      </ExternalLink>
+    </li>
+  );
+}

@@ -1,0 +1,29 @@
+# dependencies / build
+node_modules/
+.next/
+out/
+build/
+dist/
+.vercel/
+
+# env & secrets
+.env
+.env.*
+!.env.example
+*.pem
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.tsbuildinfo
+
+# agent workspace tooling (not part of the product)
+.agents/
+
+# debug logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
