@@ -1,13 +1,16 @@
-export interface GitHubRepo {
-  id: number;
-  name: string;
+import {
+  contributionChartUrl,
+  rankRepos,
+  type RankableRepo,
+} from "@/lib/github-rank";
+
+export interface GitHubRepo extends RankableRepo {
   description: string | null;
   html_url: string;
-  stargazers_count: number;
   language: string | null;
-  updated_at: string;
-  fork: boolean;
 }
+
+export { contributionChartUrl };
 
 export async function fetchGitHubRepos(
   username: string,
@@ -28,17 +31,8 @@ export async function fetchGitHubRepos(
     if (!res.ok) return [];
 
     const data = (await res.json()) as GitHubRepo[];
-    return data
-      .filter((r) => !r.fork)
-      .sort((a, b) => b.stargazers_count - a.stargazers_count || 0)
-      .slice(0, limit);
+    return rankRepos(data, limit);
   } catch {
     return [];
   }
-}
-
-export function contributionChartUrl(username: string, color = "2F2FE4") {
-  // Public third-party contribution chart image (no API key).
-  // Source pattern: ghchart.rshah.org
-  return `https://ghchart.rshah.org/${color}/${username}`;
 }

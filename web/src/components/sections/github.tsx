@@ -64,11 +64,11 @@ export async function GitHubSection() {
 
 function RepoCard({ repo }: { repo: GitHubRepo }) {
   return (
-    <li className="surface-matte rounded-xl p-4 transition-transform duration-200 hover:-translate-y-0.5">
+    <li className="surface-interactive rounded-xl">
       <ExternalLink
         href={repo.html_url}
         showMark={false}
-        className="flex h-full flex-col gap-2 focus-visible:rounded-lg"
+        className="flex h-full flex-col gap-2 rounded-xl p-4 outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
         <div className="flex items-start justify-between gap-2">
           <span className="font-medium tracking-tight text-foreground">

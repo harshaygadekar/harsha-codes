@@ -2,16 +2,12 @@ import { Download, Mail, MapPin } from "lucide-react";
 import { portfolio } from "@/content/portfolio";
 import { buttonVariants } from "@/components/ui/button";
 import { VisitorCount } from "@/components/layout/visitor-count";
+import { getInitials } from "@/lib/person";
 import { cn } from "@/lib/utils";
 
 export function HeroSection() {
   const { person, links } = portfolio;
-  const initials = person.fullName
-    .split(" ")
-    .map((p) => p[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
+  const initials = getInitials(person.fullName);
 
   return (
     <section id="hero" aria-labelledby="hero-heading" className="scroll-mt-24">
@@ -24,31 +20,31 @@ export function HeroSection() {
             aria-label="Cover banner"
           >
             <div className="pixel-grid absolute inset-0 opacity-40" />
-            <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-card/20 to-transparent" />
           </div>
 
-          <div className="relative px-4 pb-8 sm:px-8">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
+          <div className="relative px-5 pb-8 sm:px-8 sm:pb-9">
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:gap-5">
                 <div
-                  className="-mt-12 flex size-24 shrink-0 items-center justify-center overflow-hidden rounded-xl border-4 border-card bg-accent pixel-grid sm:-mt-14 sm:size-28"
+                  className="-mt-12 flex size-24 shrink-0 items-center justify-center overflow-hidden rounded-xl border-[3px] border-card bg-muted pixel-grid sm:-mt-14 sm:size-28"
                   aria-hidden
                 >
                   <span className="font-mono text-2xl font-semibold tracking-tight text-primary sm:text-3xl">
                     {initials}
                   </span>
                 </div>
-                <div className="min-w-0 pb-1">
+                <div className="min-w-0 pb-0.5">
                   <h1
                     id="hero-heading"
-                    className="text-2xl font-semibold tracking-tight sm:text-3xl"
+                    className="text-2xl font-semibold tracking-tight text-balance sm:text-[1.75rem] md:text-3xl"
                   >
                     {person.fullName}
                   </h1>
-                  <p className="mt-0.5 text-sm text-muted-foreground sm:text-base">
+                  <p className="mt-1 text-sm text-muted-foreground sm:text-[15px]">
                     {person.role}
                   </p>
-                  <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
+                  <p className="mt-1.5 flex items-center gap-1.5 text-sm text-muted-foreground/90">
                     <MapPin className="size-3.5 shrink-0 opacity-70" aria-hidden />
                     {person.location}
                   </p>
@@ -59,14 +55,14 @@ export function HeroSection() {
               </div>
             </div>
 
-            <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-[15px]">
+            <p className="mt-6 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-[15px] sm:leading-7">
               {person.summary}
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-2.5">
+            <div className="mt-7 flex flex-wrap gap-2.5">
               <a
                 href={`mailto:${person.email}`}
-                className={cn(buttonVariants({ size: "lg" }))}
+                className={cn(buttonVariants({ size: "lg" }), "px-3.5")}
               >
                 <Mail className="size-4" aria-hidden />
                 Contact me
@@ -74,7 +70,10 @@ export function HeroSection() {
               <a
                 href={links.resume}
                 download
-                className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "lg" }),
+                  "px-3.5",
+                )}
               >
                 <Download className="size-4" aria-hidden />
                 Resume
@@ -83,7 +82,10 @@ export function HeroSection() {
                 href={links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={cn(buttonVariants({ variant: "ghost", size: "lg" }))}
+                className={cn(
+                  buttonVariants({ variant: "ghost", size: "lg" }),
+                  "px-3.5",
+                )}
               >
                 GitHub
               </a>

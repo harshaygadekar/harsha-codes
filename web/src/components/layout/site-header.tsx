@@ -20,17 +20,17 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
         <Link
           href="/#hero"
-          className="font-semibold tracking-tight text-foreground"
+          className="rounded-md text-sm font-semibold tracking-tight text-foreground transition-colors hover:text-foreground/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           {portfolio.brand}
         </Link>
 
         <nav
-          className="hidden items-center gap-1 md:flex"
+          className="hidden items-center gap-0.5 md:flex"
           aria-label="Primary"
         >
           {nav.map((item) => (
@@ -40,21 +40,25 @@ export function SiteHeader() {
               className={cn(
                 "rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors",
                 "hover:bg-muted hover:text-foreground",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
               )}
             >
               {item.label}
             </Link>
           ))}
-          <ThemeToggle />
+          <div className="ml-2 border-l border-border pl-2">
+            <ThemeToggle />
+          </div>
         </nav>
 
-        <div className="flex items-center gap-1 md:hidden">
+        <div className="flex items-center gap-0.5 md:hidden">
           <ThemeToggle />
           <Button
             variant="ghost"
             size="icon-sm"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
+            aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
           >
             {open ? <X className="size-4" /> : <Menu className="size-4" />}
@@ -62,26 +66,29 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {open ? (
-        <nav
-          className="border-t border-border bg-background px-4 py-3 md:hidden"
-          aria-label="Mobile"
-        >
-          <ul className="flex flex-col gap-1">
-            {nav.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      ) : null}
+      <nav
+        id="mobile-nav"
+        className={cn(
+          "border-t border-border bg-background px-4 py-3 md:hidden",
+          !open && "hidden",
+        )}
+        aria-label="Mobile"
+        hidden={!open}
+      >
+        <ul className="flex flex-col gap-0.5">
+          {nav.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="block rounded-md px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </header>
   );
 }

@@ -10,22 +10,22 @@ export function SiteFooter() {
         <p className="text-sm text-muted-foreground">
           © {year} {portfolio.person.fullName}. Built with care.
         </p>
-        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+        <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
           <ExternalLink
             href={portfolio.links.github}
-            className="hover:text-foreground"
+            className="transition-colors hover:text-foreground"
           >
             GitHub
           </ExternalLink>
           <ExternalLink
             href={portfolio.links.linkedin}
-            className="hover:text-foreground"
+            className="transition-colors hover:text-foreground"
           >
             LinkedIn
           </ExternalLink>
           <a
             href={`mailto:${portfolio.person.email}`}
-            className="hover:text-foreground"
+            className="transition-colors hover:text-foreground"
           >
             Email
           </a>
