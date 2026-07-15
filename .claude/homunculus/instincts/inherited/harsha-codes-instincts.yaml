@@ -1,0 +1,487 @@
+# Instincts generated from https://github.com/harshaygadekar/harsha-codes
+# Generated: 2026-07-15T04:18:32.075Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: harsha-codes-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Commit Length
+
+## Action
+
+Write moderate-length commit messages (~61 characters)
+
+## Evidence
+
+- Average commit message length: 61 chars
+- Based on 4 commits
+
+---
+id: harsha-codes-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Naming Files
+
+## Action
+
+Use camelCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: camelCase
+
+---
+id: harsha-codes-import-alias
+trigger: "when importing modules"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Import Alias
+
+## Action
+
+Use path aliases (@/, ~/) instead of relative imports
+
+## Evidence
+
+- Import analysis shows alias pattern
+- Example: import { x } from '@/lib/x'
+
+---
+id: harsha-codes-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: harsha-codes-arch-type-based
+trigger: "when adding new code"
+confidence: 0.8
+domain: architecture
+source: repo-analysis
+source_repo: https://github.com/harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Arch Type Based
+
+## Action
+
+Place code in the appropriate type folder (components/, services/, utils/, etc.)
+
+## Evidence
+
+- Type-based module organization detected
+- Folders: 
+
+---
+id: harsha-codes-test-framework
+trigger: "when writing tests"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Test Framework
+
+## Action
+
+Use vitest as the test framework
+
+## Evidence
+
+- Test framework detected: vitest
+- File pattern: *.test.ts
+
+---
+id: harsha-codes-test-naming
+trigger: "when creating a test file"
+confidence: 0.85
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Test Naming
+
+## Action
+
+Name test files using the pattern: *.test.ts
+
+## Evidence
+
+- File pattern: *.test.ts
+- Consistent across test files
+
+---
+id: harsha-codes-workflow-update-section-components-and-layout
+trigger: "when doing update section components and layout"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Workflow Update Section Components And Layout
+
+## Action
+
+Follow the update-section-components-and-layout workflow:
+1. Edit one or more files in web/src/components/sections/ (such as experience.tsx, contact.tsx, tech.tsx, etc.)
+2. Update shared layout components in web/src/components/layout/ (such as section.tsx, site-footer.tsx)
+3. Optionally update supporting files (e.g., web/src/lib/tech-icons.ts, web/src/content/portfolio.ts)
+4. Test changes in the browser or with unit tests
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: web/src/components/sections/*.tsx, web/src/components/layout/*.tsx
+
+---
+id: harsha-codes-workflow-refactor-or-add-helper-libs-with-tests
+trigger: "when doing refactor or add helper libs with tests"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Workflow Refactor Or Add Helper Libs With Tests
+
+## Action
+
+Follow the refactor-or-add-helper-libs-with-tests workflow:
+1. Edit or create files in web/src/lib/*.ts for new or updated helpers
+2. Edit or create corresponding test files in web/src/lib/*.test.ts
+3. Run tests to verify correctness
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: web/src/lib/*.ts, web/src/lib/*.test.ts
+
+---
+id: harsha-codes-instinct-file-naming
+trigger: "When creating or renaming files in the codebase"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Instinct File Naming
+
+## Action
+
+Use camelCase for file names
+
+## Evidence
+
+- Pattern in namingConventions.files
+- Consistent across web/src/components/sections/*.tsx
+
+---
+id: harsha-codes-instinct-function-naming
+trigger: "When defining new functions"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Instinct Function Naming
+
+## Action
+
+Use camelCase for function names
+
+## Evidence
+
+- Pattern in namingConventions.functions
+- TypeScript code examples
+
+---
+id: harsha-codes-instinct-class-naming
+trigger: "When defining new classes"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Instinct Class Naming
+
+## Action
+
+Use PascalCase for class names
+
+## Evidence
+
+- Pattern in namingConventions.classes
+
+---
+id: harsha-codes-instinct-constant-naming
+trigger: "When defining constants"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Instinct Constant Naming
+
+## Action
+
+Use SCREAMING_SNAKE_CASE for constant names
+
+## Evidence
+
+- Pattern in namingConventions.constants
+
+---
+id: harsha-codes-instinct-import-style
+trigger: "When importing modules"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Instinct Import Style
+
+## Action
+
+Use alias imports
+
+## Evidence
+
+- Pattern in importStyle: alias
+
+---
+id: harsha-codes-instinct-export-style
+trigger: "When exporting modules or functions"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Instinct Export Style
+
+## Action
+
+Use named exports
+
+## Evidence
+
+- Pattern in exportStyle: named
+
+---
+id: harsha-codes-instinct-test-file-pattern
+trigger: "When creating test files"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Instinct Test File Pattern
+
+## Action
+
+Name test files with the pattern *.test.ts
+
+## Evidence
+
+- Pattern in testing.filePattern
+- web/src/lib/*.test.ts
+
+---
+id: harsha-codes-instinct-test-framework
+trigger: "When writing tests"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Instinct Test Framework
+
+## Action
+
+Use vitest as the testing framework
+
+## Evidence
+
+- Pattern in testing.framework
+
+---
+id: harsha-codes-instinct-unit-tests
+trigger: "When testing utility/helper functions"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Instinct Unit Tests
+
+## Action
+
+Write unit tests for each helper in web/src/lib/*.ts
+
+## Evidence
+
+- Pattern in testing.testTypes
+- web/src/lib/*.test.ts
+
+---
+id: harsha-codes-instinct-no-coverage-config
+trigger: "When configuring tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Instinct No Coverage Config
+
+## Action
+
+Do not set up code coverage configuration
+
+## Evidence
+
+- testing.coverageConfig is false
+
+---
+id: harsha-codes-instinct-commit-format-freeform
+trigger: "When writing commit messages"
+confidence: 0.8
+domain: git
+source: repo-analysis
+source_repo: harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Instinct Commit Format Freeform
+
+## Action
+
+Use concise, freeform commit messages describing the change (no enforced prefix)
+
+## Evidence
+
+- commits.type is freeform
+- Examples: 'Fix tech icons, timeline alignment, content, and section spacing'
+
+---
+id: harsha-codes-instinct-commit-length
+trigger: "When writing commit messages"
+confidence: 0.7
+domain: git
+source: repo-analysis
+source_repo: harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Instinct Commit Length
+
+## Action
+
+Keep commit messages around 60 characters on average
+
+## Evidence
+
+- commits.averageLength is 61
+
+---
+id: harsha-codes-instinct-update-section-workflow
+trigger: "When updating the content, layout, or behavior of portfolio sections or shared layout components"
+confidence: 0.95
+domain: workflow
+source: repo-analysis
+source_repo: harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Instinct Update Section Workflow
+
+## Action
+
+Edit files in web/src/components/sections/ and web/src/components/layout/, optionally update supporting files, and test changes in browser or with unit tests
+
+## Evidence
+
+- Workflow: update-section-components-and-layout
+- Commit examples: 'Polish portfolio UX: hierarchy, surfaces, focus, and tested helpers'
+
+---
+id: harsha-codes-instinct-helper-lib-workflow
+trigger: "When adding or refactoring utility/helper functions"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Instinct Helper Lib Workflow
+
+## Action
+
+Edit or create files in web/src/lib/*.ts, create or update corresponding test files in web/src/lib/*.test.ts, and run tests to verify correctness
+
+## Evidence
+
+- Workflow: refactor-or-add-helper-libs-with-tests
+- Pattern in files web/src/lib/*.ts and web/src/lib/*.test.ts
+
+---
+id: harsha-codes-instinct-try-catch-error-handling
+trigger: "When handling errors in code"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: harshaygadekar/harsha-codes
+---
+
+# Harsha Codes Instinct Try Catch Error Handling
+
+## Action
+
+Use try-catch blocks for error handling
+
+## Evidence
+
+- errorHandling.style is try-catch
+
