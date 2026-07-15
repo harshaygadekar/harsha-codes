@@ -1,7 +1,8 @@
 import { portfolio } from "@/content/portfolio";
-import { Section } from "@/components/layout/section";
+import { Section, sectionTitleClass } from "@/components/layout/section";
 import { Reveal, RevealItem } from "@/components/layout/reveal";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 export function ExperienceSection() {
   const jobs = portfolio.experience;
@@ -71,8 +72,13 @@ export function ExperienceSection() {
         </ol>
       </Reveal>
 
-      <Reveal className="mt-10" delay={0.06}>
-        <h3 className="section-label mb-4">Education</h3>
+      <Reveal className="mt-12 md:mt-14" delay={0.06}>
+        <header className="mb-6 md:mb-8">
+          <p className="section-eyebrow" aria-hidden>
+            Education
+          </p>
+          <h3 className={cn(sectionTitleClass)}>Education</h3>
+        </header>
         <Reveal
           variant="stagger-fast"
           as="ul"
@@ -82,7 +88,7 @@ export function ExperienceSection() {
             <RevealItem
               key={ed.id}
               as="li"
-              className="surface-matte rounded-2xl p-4 sm:p-5"
+              className="surface-matte rounded-2xl p-5 sm:p-6"
             >
               <p className="font-medium tracking-tight">{ed.school}</p>
               <p className="mt-1 text-sm text-muted-foreground">{ed.degree}</p>

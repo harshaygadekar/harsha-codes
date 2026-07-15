@@ -74,8 +74,9 @@ export function ContactSection() {
       id="contact"
       title="Contact"
       description="Open to software engineering roles in Bengaluru or remote India."
-      className="pb-12 md:pb-16"
+      className="pb-10 md:pb-14"
       index="06"
+      align="center"
     >
       <Reveal>
         <div className="surface-matte mx-auto max-w-xl rounded-2xl p-6 sm:p-9">

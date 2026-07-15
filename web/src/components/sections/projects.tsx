@@ -1,7 +1,7 @@
 import { ArrowUpRight, Code2, FileText } from "lucide-react";
 import { portfolio } from "@/content/portfolio";
 import type { ProjectItem } from "@/types/portfolio";
-import { Section } from "@/components/layout/section";
+import { Section, sectionTitleClass } from "@/components/layout/section";
 import { Reveal, RevealItem } from "@/components/layout/reveal";
 import { ExternalLink } from "@/components/layout/external-link";
 import { cn } from "@/lib/utils";
@@ -230,29 +230,37 @@ export function ProjectsSection() {
       </Reveal>
 
       {portfolio.publications.length > 0 ? (
-        <Reveal className="mt-12" delay={0.05}>
-          <h3 className="section-label mb-4">Research</h3>
-          <ul className="grid gap-3 sm:grid-cols-2">
+        <Reveal className="mt-12 md:mt-14" delay={0.05}>
+          <header className="mb-6 md:mb-8">
+            <p className="section-eyebrow" aria-hidden>
+              Research
+            </p>
+            <h3 className={sectionTitleClass}>Research</h3>
+          </header>
+          {/* Full-width cards — same content max width as bento grid above */}
+          <ul className="grid grid-cols-1 gap-3">
             {portfolio.publications.map((pub) => (
               <li
                 key={pub.id}
-                className="surface-elevated-hover flex h-full flex-col rounded-2xl p-5 sm:p-6"
+                className="surface-elevated-hover flex w-full flex-col rounded-2xl p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-8 sm:p-6"
               >
-                <p className="font-mono text-xs text-primary">
-                  {pub.role} · {pub.venue}
-                </p>
-                <h4 className="mt-1.5 text-sm font-medium leading-snug tracking-tight sm:text-base">
-                  {pub.title}
-                </h4>
-                <p className="mt-1.5 font-mono text-xs text-muted-foreground">
-                  {pub.date}
-                </p>
-                {pub.note ? (
-                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                    {pub.note}
+                <div className="min-w-0 flex-1">
+                  <p className="font-mono text-xs text-primary">
+                    {pub.role} · {pub.venue}
                   </p>
-                ) : null}
-                <div className="mt-auto flex flex-wrap items-center gap-3 border-t border-border/80 pt-3">
+                  <h4 className="mt-1.5 text-base font-semibold leading-snug tracking-tight sm:text-lg">
+                    {pub.title}
+                  </h4>
+                  <p className="mt-1.5 font-mono text-xs text-muted-foreground">
+                    {pub.date}
+                  </p>
+                  {pub.note ? (
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      {pub.note}
+                    </p>
+                  ) : null}
+                </div>
+                <div className="mt-4 flex shrink-0 flex-wrap items-center gap-3 border-t border-border/80 pt-3 sm:mt-0 sm:border-0 sm:pt-1">
                   {pub.github ? (
                     <ExternalLink
                       href={pub.github}
