@@ -1,5 +1,6 @@
 import { techByCategory } from "@/content/portfolio";
 import { Section } from "@/components/layout/section";
+import { techIconUrl } from "@/lib/tech-icons";
 import { cn } from "@/lib/utils";
 
 const labels = {
@@ -8,6 +9,30 @@ const labels = {
   tools: "Tools",
   libraries: "Libraries",
 } as const;
+
+function TechIcon({ slug, label }: { slug: string; label: string }) {
+  // Monochrome mask: inherits foreground color — readable in light + dark.
+  // Avoids dark:invert on brand-colored SVGs (root cause of dark-mode failures).
+  const url = techIconUrl(slug);
+
+  return (
+    <span
+      aria-hidden
+      title={label}
+      className="inline-block size-4 shrink-0 bg-foreground/80"
+      style={{
+        maskImage: `url(${url})`,
+        maskSize: "contain",
+        maskRepeat: "no-repeat",
+        maskPosition: "center",
+        WebkitMaskImage: `url(${url})`,
+        WebkitMaskSize: "contain",
+        WebkitMaskRepeat: "no-repeat",
+        WebkitMaskPosition: "center",
+      }}
+    />
+  );
+}
 
 function TechChip({ name, icon }: { name: string; icon?: string }) {
   return (
@@ -21,16 +46,7 @@ function TechChip({ name, icon }: { name: string; icon?: string }) {
         )}
       >
         {icon ? (
-          // simple-icons CDN — cached, no npm dep
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={`https://cdn.simpleicons.org/${icon}`}
-            alt=""
-            width={16}
-            height={16}
-            className="size-4 opacity-90 dark:invert dark:opacity-80"
-            loading="lazy"
-          />
+          <TechIcon slug={icon} label={name} />
         ) : (
           <span className="size-1.5 rounded-full bg-primary/70" aria-hidden />
         )}
