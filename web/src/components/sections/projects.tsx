@@ -13,24 +13,25 @@ export function ProjectsSection() {
       id="projects"
       title="Projects"
       description="Recruiter-focused impact — not a feature dump."
+      index="03"
     >
       <Reveal
         variant="stagger"
         as="ul"
-        className="grid gap-4 sm:grid-cols-2"
+        className="grid gap-4 sm:grid-cols-2 sm:gap-5"
       >
         {portfolio.projects.map((project) => (
           <RevealItem
             key={project.id}
             as="li"
-            className="surface-elevated-hover flex flex-col rounded-xl p-5 sm:p-6"
+            className="surface-elevated-hover flex flex-col rounded-2xl p-5 sm:p-7"
           >
             <div className="flex items-start justify-between gap-3">
               <h3 className="text-base font-semibold tracking-tight sm:text-lg">
                 {project.title}
               </h3>
               {project.heroMetric ? (
-                <span className="shrink-0 rounded-md border border-primary/20 bg-primary/10 px-2 py-1 font-mono text-[11px] font-medium leading-tight text-foreground sm:text-xs">
+                <span className="shrink-0 rounded-lg border border-primary/20 bg-primary/10 px-2.5 py-1 font-mono text-[10px] font-medium leading-tight tracking-tight text-primary sm:text-[11px]">
                   {project.heroMetric}
                 </span>
               ) : null}
@@ -109,7 +110,7 @@ export function ProjectsSection() {
               <RevealItem
                 key={pub.id}
                 as="li"
-                className="surface-elevated-hover rounded-xl p-5"
+                className="surface-elevated-hover rounded-2xl p-5 sm:p-6"
               >
                 <p className="font-mono text-xs text-primary">
                   {pub.role} · {pub.venue}

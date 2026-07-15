@@ -74,10 +74,11 @@ export function ContactSection() {
       id="contact"
       title="Contact"
       description="Open to software engineering roles in Bengaluru or remote India."
-      className="pb-10 md:pb-14"
+      className="pb-12 md:pb-16"
+      index="06"
     >
       <Reveal>
-        <div className="surface-matte mx-auto max-w-xl rounded-xl p-5 sm:p-8">
+        <div className="surface-matte mx-auto max-w-xl rounded-2xl p-6 sm:p-9">
           <form onSubmit={onSubmit} className="relative space-y-5" noValidate>
             <div
               className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden"

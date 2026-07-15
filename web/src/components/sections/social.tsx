@@ -23,11 +23,12 @@ export function SocialSection() {
       id="social"
       title="Connect"
       description="Find me where I ship code and talk shop."
+      index="01"
     >
       <Reveal
         variant="stagger"
         as="ul"
-        className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
+        className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3"
       >
         {enabledSocial.map((item, i) => {
           const Icon = icons[item.id];
@@ -38,18 +39,18 @@ export function SocialSection() {
               key={item.id}
               as="li"
               className={cn(
-                "surface-interactive group rounded-xl",
+                "surface-interactive group rounded-2xl",
                 featured && "sm:col-span-2 lg:col-span-1",
               )}
             >
               <ExternalLink
                 href={item.href}
                 showMark={false}
-                className="flex h-full flex-col gap-4 rounded-xl p-5 outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="flex h-full flex-col gap-5 rounded-2xl p-5 outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:p-6"
                 aria-label={`${item.label}${item.metric ? `, ${item.metric} ${item.metricLabel ?? ""}` : ""}`}
               >
                 <div className="flex items-start justify-between gap-3">
-                  <span className="flex size-10 items-center justify-center rounded-lg bg-muted text-primary ring-1 ring-border/60">
+                  <span className="flex size-11 items-center justify-center rounded-xl bg-muted text-primary ring-1 ring-border/50">
                     <Icon className="size-5" aria-hidden />
                   </span>
                   <span

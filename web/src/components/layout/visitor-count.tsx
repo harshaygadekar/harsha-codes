@@ -34,14 +34,16 @@ export function VisitorCount() {
 
   return (
     <div
-      className="inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3 py-1.5 text-xs text-muted-foreground shadow-sm"
+      className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-background/70 px-3 py-1.5 text-xs text-muted-foreground shadow-sm backdrop-blur-sm"
       aria-live="polite"
-      title="Approximate unique visitors this session tracks"
+      title="Approximate unique visitors"
     >
-      <Eye className="size-3.5 opacity-70" aria-hidden />
+      <Eye className="size-3.5 text-primary/80" aria-hidden />
       <span>
-        You are visitor{" "}
-        <span className="font-mono font-medium text-foreground">#{display}</span>
+        Visitor{" "}
+        <span className="font-mono font-semibold tabular-nums text-foreground">
+          #{display}
+        </span>
       </span>
     </div>
   );

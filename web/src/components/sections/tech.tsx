@@ -37,10 +37,10 @@ function TechChip({ name, icon }: { name: string; icon?: string }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2",
+        "inline-flex items-center gap-2 rounded-xl border border-border bg-card/80 px-3.5 py-2",
         "text-sm text-foreground/90 shadow-[var(--shadow-card)]",
         "transition-[transform,border-color,background-color,box-shadow] duration-150",
-        "hover:-translate-y-px hover:border-primary/35 hover:bg-muted/50 hover:shadow-[var(--shadow-card-hover)]",
+        "hover:-translate-y-px hover:border-primary/30 hover:bg-muted/40 hover:shadow-[var(--shadow-card-hover)]",
       )}
     >
       {icon ? (
@@ -59,6 +59,7 @@ export function TechSection() {
       id="tech"
       title="Tech stack"
       description="Tools I use to ship production systems."
+      index="04"
     >
       <div className="space-y-7">
         {(Object.keys(labels) as Array<keyof typeof labels>).map((key, i) => (

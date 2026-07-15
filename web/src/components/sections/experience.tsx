@@ -11,12 +11,12 @@ export function ExperienceSection() {
       id="experience"
       title="Experience"
       description="Production work with measurable impact."
+      index="02"
     >
       <Reveal variant="stagger">
         <ol className="relative space-y-6">
-          {/* Continuous vertical rail — independent of item count */}
           <span
-            className="absolute top-2 bottom-2 left-[5px] w-px bg-border sm:left-[7px]"
+            className="absolute top-3 bottom-3 left-[5px] w-px bg-gradient-to-b from-primary/50 via-border to-border sm:left-[7px]"
             aria-hidden
           />
 
@@ -26,12 +26,11 @@ export function ExperienceSection() {
               as="li"
               className="relative grid grid-cols-[12px_minmax(0,1fr)] gap-x-4 sm:grid-cols-[16px_minmax(0,1fr)] sm:gap-x-5"
             >
-              {/* Dot centered on the rail */}
-              <div className="relative z-[1] flex justify-center pt-6" aria-hidden>
-                <span className="size-2.5 shrink-0 rounded-full border-2 border-primary bg-background ring-[3px] ring-background sm:size-3" />
+              <div className="relative z-[1] flex justify-center pt-7" aria-hidden>
+                <span className="size-2.5 shrink-0 rounded-full border-2 border-primary bg-background shadow-[0_0_0_4px_var(--background)] sm:size-3" />
               </div>
 
-              <article className="surface-matte min-w-0 rounded-xl p-5 sm:p-6">
+              <article className="surface-matte min-w-0 rounded-2xl p-5 sm:p-7">
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
                   <div>
                     <h3 className="text-base font-semibold tracking-tight sm:text-lg">
@@ -83,7 +82,7 @@ export function ExperienceSection() {
             <RevealItem
               key={ed.id}
               as="li"
-              className="surface-matte rounded-xl p-4 sm:p-5"
+              className="surface-matte rounded-2xl p-4 sm:p-5"
             >
               <p className="font-medium tracking-tight">{ed.school}</p>
               <p className="mt-1 text-sm text-muted-foreground">{ed.degree}</p>

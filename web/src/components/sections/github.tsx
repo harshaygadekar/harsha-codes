@@ -19,9 +19,10 @@ export async function GitHubSection() {
       id="github"
       title="GitHub activity"
       description="Recent public work and contribution cadence."
+      index="05"
     >
       <Reveal>
-        <div className="surface-matte overflow-x-auto rounded-xl p-4 sm:p-6">
+        <div className="surface-matte overflow-x-auto rounded-2xl p-5 sm:p-7">
           <p className="mb-3 text-xs text-muted-foreground">
             Contribution graph ·{" "}
             <ExternalLink
@@ -75,11 +76,11 @@ export async function GitHubSection() {
 
 function RepoCard({ repo }: { repo: GitHubRepo }) {
   return (
-    <div className="surface-interactive h-full rounded-xl">
+    <div className="surface-interactive h-full rounded-2xl">
       <ExternalLink
         href={repo.html_url}
         showMark={false}
-        className="flex h-full flex-col gap-2 rounded-xl p-4 outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        className="flex h-full flex-col gap-2.5 rounded-2xl p-5 outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
         <div className="flex items-start justify-between gap-2">
           <span className="font-medium tracking-tight text-foreground">

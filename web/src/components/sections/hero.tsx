@@ -1,6 +1,6 @@
 "use client";
 
-import { Download, Mail, MapPin } from "lucide-react";
+import { Download, Mail, MapPin, ArrowUpRight } from "lucide-react";
 import { portfolio } from "@/content/portfolio";
 import { buttonVariants } from "@/components/ui/button";
 import { VisitorCount } from "@/components/layout/visitor-count";
@@ -14,42 +14,58 @@ export function HeroSection() {
 
   return (
     <section id="hero" aria-labelledby="hero-heading" className="scroll-mt-24">
-      <div className="mx-auto max-w-5xl px-4 pt-6 sm:px-6 md:pt-10">
+      <div className="mx-auto max-w-5xl px-4 pt-8 sm:px-6 md:pt-12">
         <Reveal variant="fade">
-          <div className="surface-matte overflow-hidden rounded-xl">
+          <div className="gradient-border surface-matte relative overflow-hidden rounded-2xl">
+            <div className="noise-overlay" />
+
+            {/* Cover */}
             <div
-              className="relative h-28 w-full sm:h-36 md:h-44"
+              className="relative h-32 w-full sm:h-40 md:h-48"
               style={{ background: "var(--banner-glow)" }}
               role="img"
               aria-label="Cover banner"
             >
-              <div className="pixel-grid absolute inset-0 opacity-40" />
-              <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-card/20 to-transparent" />
+              <div className="pixel-grid absolute inset-0 opacity-50" />
+              <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
+              {/* Soft brand orb */}
+              <div
+                className="absolute -right-8 top-1/2 size-40 -translate-y-1/2 rounded-full opacity-40 blur-3xl sm:size-56"
+                style={{ background: "var(--brand)" }}
+                aria-hidden
+              />
             </div>
 
-            <div className="relative px-5 pb-8 sm:px-8 sm:pb-9">
-              <Reveal delay={0.06}>
-                <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-                  <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:gap-5">
+            <div className="relative px-5 pb-8 sm:px-8 sm:pb-10 md:px-10">
+              <Reveal delay={0.05}>
+                <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+                  <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:gap-6">
                     <div
-                      className="-mt-12 flex size-24 shrink-0 items-center justify-center overflow-hidden rounded-xl border-[3px] border-card bg-muted pixel-grid sm:-mt-14 sm:size-28"
+                      className="-mt-14 flex size-[5.5rem] shrink-0 items-center justify-center overflow-hidden rounded-2xl border-[3px] border-card bg-[var(--brand)] pixel-grid shadow-lg sm:-mt-16 sm:size-28"
                       aria-hidden
                     >
-                      <span className="font-mono text-2xl font-semibold tracking-tight text-primary sm:text-3xl">
+                      <span className="font-mono text-2xl font-semibold tracking-tight text-white sm:text-3xl">
                         {initials}
                       </span>
                     </div>
                     <div className="min-w-0 pb-0.5">
+                      <div className="mb-2.5 inline-flex items-center gap-2 rounded-full border border-border bg-muted/60 px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
+                        <span className="relative flex size-1.5">
+                          <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400/60 opacity-60" />
+                          <span className="relative inline-flex size-1.5 rounded-full bg-emerald-500" />
+                        </span>
+                        Open to opportunities
+                      </div>
                       <h1
                         id="hero-heading"
-                        className="text-2xl font-semibold tracking-tight text-balance sm:text-[1.75rem] md:text-3xl"
+                        className="text-3xl font-semibold tracking-tight text-balance sm:text-4xl md:text-[2.5rem] md:leading-[1.15]"
                       >
                         {person.fullName}
                       </h1>
-                      <p className="mt-1 text-sm text-muted-foreground sm:text-[15px]">
+                      <p className="mt-1.5 text-[15px] font-medium text-primary sm:text-base">
                         {person.role}
                       </p>
-                      <p className="mt-1.5 flex items-center gap-1.5 text-sm text-muted-foreground/90">
+                      <p className="mt-2 flex items-center gap-1.5 text-sm text-muted-foreground">
                         <MapPin
                           className="size-3.5 shrink-0 opacity-70"
                           aria-hidden
@@ -64,17 +80,20 @@ export function HeroSection() {
                 </div>
               </Reveal>
 
-              <Reveal delay={0.12}>
-                <p className="mt-6 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-[15px] sm:leading-7">
+              <Reveal delay={0.1}>
+                <p className="mt-7 max-w-2xl text-[15px] leading-7 text-muted-foreground sm:text-base sm:leading-8">
                   {person.summary}
                 </p>
               </Reveal>
 
-              <Reveal delay={0.18}>
-                <div className="mt-7 flex flex-wrap gap-2.5">
+              <Reveal delay={0.16}>
+                <div className="mt-8 flex flex-wrap items-center gap-3">
                   <a
                     href={`mailto:${person.email}`}
-                    className={cn(buttonVariants({ size: "lg" }), "px-3.5")}
+                    className={cn(
+                      buttonVariants({ size: "lg" }),
+                      "h-11 rounded-xl px-5 shadow-md",
+                    )}
                   >
                     <Mail className="size-4" aria-hidden />
                     Contact me
@@ -84,7 +103,7 @@ export function HeroSection() {
                     download
                     className={cn(
                       buttonVariants({ variant: "outline", size: "lg" }),
-                      "px-3.5",
+                      "h-11 rounded-xl px-5",
                     )}
                   >
                     <Download className="size-4" aria-hidden />
@@ -96,10 +115,11 @@ export function HeroSection() {
                     rel="noopener noreferrer"
                     className={cn(
                       buttonVariants({ variant: "ghost", size: "lg" }),
-                      "px-3.5",
+                      "h-11 rounded-xl px-4 text-muted-foreground",
                     )}
                   >
                     GitHub
+                    <ArrowUpRight className="size-3.5 opacity-60" aria-hidden />
                   </a>
                 </div>
               </Reveal>
