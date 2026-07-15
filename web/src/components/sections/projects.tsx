@@ -1,6 +1,7 @@
 import { Code2, FileText } from "lucide-react";
 import { portfolio } from "@/content/portfolio";
 import { Section } from "@/components/layout/section";
+import { Reveal, RevealItem } from "@/components/layout/reveal";
 import { ExternalLink } from "@/components/layout/external-link";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
@@ -13,10 +14,15 @@ export function ProjectsSection() {
       title="Projects"
       description="Recruiter-focused impact — not a feature dump."
     >
-      <ul className="grid gap-4 sm:grid-cols-2">
+      <Reveal
+        variant="stagger"
+        as="ul"
+        className="grid gap-4 sm:grid-cols-2"
+      >
         {portfolio.projects.map((project) => (
-          <li
+          <RevealItem
             key={project.id}
+            as="li"
             className="surface-matte flex flex-col rounded-xl p-5 sm:p-6"
           >
             <div className="flex items-start justify-between gap-3">
@@ -73,7 +79,9 @@ export function ProjectsSection() {
                   href={project.demo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "sm" }),
+                  )}
                 >
                   Live demo
                 </a>
@@ -85,51 +93,61 @@ export function ProjectsSection() {
                 </span>
               ) : null}
             </div>
-          </li>
+          </RevealItem>
         ))}
-      </ul>
+      </Reveal>
 
-      <div className="mt-12">
-        <h3 className="section-label mb-4">Research</h3>
-        <ul className="grid gap-3 sm:grid-cols-2">
-          {portfolio.publications.map((pub) => (
-            <li key={pub.id} className="surface-matte rounded-xl p-5">
-              <p className="font-mono text-xs text-primary">
-                {pub.role} · {pub.venue}
-              </p>
-              <h4 className="mt-1.5 text-sm font-medium leading-snug tracking-tight sm:text-base">
-                {pub.title}
-              </h4>
-              <p className="mt-1.5 font-mono text-xs text-muted-foreground">
-                {pub.date}
-              </p>
-              {pub.note ? (
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {pub.note}
+      {portfolio.publications.length > 0 ? (
+        <Reveal className="mt-12" delay={0.05}>
+          <h3 className="section-label mb-4">Research</h3>
+          <Reveal
+            variant="stagger-fast"
+            as="ul"
+            className="grid gap-3 sm:grid-cols-2"
+          >
+            {portfolio.publications.map((pub) => (
+              <RevealItem
+                key={pub.id}
+                as="li"
+                className="surface-matte rounded-xl p-5"
+              >
+                <p className="font-mono text-xs text-primary">
+                  {pub.role} · {pub.venue}
                 </p>
-              ) : null}
-              <div className="mt-3 flex flex-wrap gap-3">
-                {pub.github ? (
-                  <ExternalLink
-                    href={pub.github}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    Code
-                  </ExternalLink>
+                <h4 className="mt-1.5 text-sm font-medium leading-snug tracking-tight sm:text-base">
+                  {pub.title}
+                </h4>
+                <p className="mt-1.5 font-mono text-xs text-muted-foreground">
+                  {pub.date}
+                </p>
+                {pub.note ? (
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {pub.note}
+                  </p>
                 ) : null}
-                {pub.paperUrl ? (
-                  <ExternalLink
-                    href={pub.paperUrl}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    Paper
-                  </ExternalLink>
-                ) : null}
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+                <div className="mt-3 flex flex-wrap gap-3">
+                  {pub.github ? (
+                    <ExternalLink
+                      href={pub.github}
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      Code
+                    </ExternalLink>
+                  ) : null}
+                  {pub.paperUrl ? (
+                    <ExternalLink
+                      href={pub.paperUrl}
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      Paper
+                    </ExternalLink>
+                  ) : null}
+                </div>
+              </RevealItem>
+            ))}
+          </Reveal>
+        </Reveal>
+      ) : null}
     </Section>
   );
 }

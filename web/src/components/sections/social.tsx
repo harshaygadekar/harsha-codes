@@ -2,6 +2,7 @@ import type { ComponentType } from "react";
 import { Code2, Briefcase, Mail, AtSign } from "lucide-react";
 import { enabledSocial } from "@/content/portfolio";
 import { Section } from "@/components/layout/section";
+import { Reveal, RevealItem } from "@/components/layout/reveal";
 import { ExternalLink } from "@/components/layout/external-link";
 import type { SocialPlatform } from "@/types/portfolio";
 import { cn } from "@/lib/utils";
@@ -23,14 +24,19 @@ export function SocialSection() {
       title="Connect"
       description="Find me where I ship code and talk shop."
     >
-      <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <Reveal
+        variant="stagger"
+        as="ul"
+        className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
+      >
         {enabledSocial.map((item, i) => {
           const Icon = icons[item.id];
           const featured = i === 0;
 
           return (
-            <li
+            <RevealItem
               key={item.id}
+              as="li"
               className={cn(
                 "surface-interactive group rounded-xl",
                 featured && "sm:col-span-2 lg:col-span-1",
@@ -47,7 +53,7 @@ export function SocialSection() {
                     <Icon className="size-5" aria-hidden />
                   </span>
                   <span
-                    className="text-sm text-muted-foreground opacity-40 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
+                    className="text-sm text-muted-foreground opacity-40 transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100"
                     aria-hidden
                   >
                     ↗
@@ -63,10 +69,10 @@ export function SocialSection() {
                   ) : null}
                 </div>
               </ExternalLink>
-            </li>
+            </RevealItem>
           );
         })}
-      </ul>
+      </Reveal>
     </Section>
   );
 }

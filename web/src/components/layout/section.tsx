@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { FadeIn } from "@/components/layout/fade-in";
+import { Reveal } from "@/components/layout/reveal";
 
 interface SectionProps {
   id: string;
@@ -26,7 +26,7 @@ export function Section({
     >
       <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
         {title ? (
-          <FadeIn>
+          <Reveal>
             <header className={cn("mb-6 md:mb-8", headingClassName)}>
               <h2
                 id={`${id}-heading`}
@@ -40,9 +40,9 @@ export function Section({
                 </p>
               ) : null}
             </header>
-          </FadeIn>
+          </Reveal>
         ) : null}
-        <FadeIn>{children}</FadeIn>
+        {children}
       </div>
     </section>
   );

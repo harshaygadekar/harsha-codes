@@ -1,7 +1,7 @@
 import { portfolio } from "@/content/portfolio";
 import { Section } from "@/components/layout/section";
+import { Reveal, RevealItem } from "@/components/layout/reveal";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 
 export function ExperienceSection() {
   const jobs = portfolio.experience;
@@ -12,31 +12,25 @@ export function ExperienceSection() {
       title="Experience"
       description="Production work with measurable impact."
     >
-      {/*
-        Two-column timeline: rail (dot + line) | card.
-        Avoids absolute -left math that drifts across breakpoints.
-      */}
-      <ol className="space-y-6">
-        {jobs.map((job, index) => {
-          const isLast = index === jobs.length - 1;
+      <Reveal variant="stagger">
+        <ol className="relative space-y-6">
+          {/* Continuous vertical rail — independent of item count */}
+          <span
+            className="absolute top-2 bottom-2 left-[5px] w-px bg-border sm:left-[7px]"
+            aria-hidden
+          />
 
-          return (
-            <li
+          {jobs.map((job) => (
+            <RevealItem
               key={job.id}
-              className="grid grid-cols-[1rem_minmax(0,1fr)] gap-x-4 sm:grid-cols-[1.25rem_minmax(0,1fr)] sm:gap-x-5"
+              as="li"
+              className="relative grid grid-cols-[12px_minmax(0,1fr)] gap-x-4 sm:grid-cols-[16px_minmax(0,1fr)] sm:gap-x-5"
             >
-              {/* Timeline rail */}
-              <div className="relative flex flex-col items-center" aria-hidden>
-                <span className="mt-5 size-2.5 shrink-0 rounded-full border-2 border-primary bg-background sm:mt-6" />
-                {!isLast ? (
-                  <span className="mt-1 w-px flex-1 bg-border" />
-                ) : (
-                  // Keep column width consistent when no continuation line
-                  <span className="mt-1 w-px flex-1 bg-transparent" />
-                )}
+              {/* Dot centered on the rail */}
+              <div className="relative z-[1] flex justify-center pt-6" aria-hidden>
+                <span className="size-2.5 shrink-0 rounded-full border-2 border-primary bg-background ring-[3px] ring-background sm:size-3" />
               </div>
 
-              {/* Content */}
               <article className="surface-matte min-w-0 rounded-xl p-5 sm:p-6">
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
                   <div>
@@ -73,18 +67,23 @@ export function ExperienceSection() {
                   ))}
                 </div>
               </article>
-            </li>
-          );
-        })}
-      </ol>
+            </RevealItem>
+          ))}
+        </ol>
+      </Reveal>
 
-      <div className="mt-10">
+      <Reveal className="mt-10" delay={0.06}>
         <h3 className="section-label mb-4">Education</h3>
-        <ul className="grid gap-3 sm:grid-cols-2">
+        <Reveal
+          variant="stagger-fast"
+          as="ul"
+          className="grid gap-3 sm:grid-cols-2"
+        >
           {portfolio.education.map((ed) => (
-            <li
+            <RevealItem
               key={ed.id}
-              className={cn("surface-matte rounded-xl p-4 sm:p-5")}
+              as="li"
+              className="surface-matte rounded-xl p-4 sm:p-5"
             >
               <p className="font-medium tracking-tight">{ed.school}</p>
               <p className="mt-1 text-sm text-muted-foreground">{ed.degree}</p>
@@ -92,10 +91,10 @@ export function ExperienceSection() {
                 {ed.start} – {ed.end}
                 {ed.cgpa ? ` · CGPA ${ed.cgpa}` : null}
               </p>
-            </li>
+            </RevealItem>
           ))}
-        </ul>
-      </div>
+        </Reveal>
+      </Reveal>
     </Section>
   );
 }

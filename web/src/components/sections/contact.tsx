@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Send } from "lucide-react";
 import { portfolio } from "@/content/portfolio";
 import { Section } from "@/components/layout/section";
+import { Reveal } from "@/components/layout/reveal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -60,6 +61,7 @@ export function ContactSection() {
       description="Open to software engineering roles in Bengaluru or remote India."
       className="pb-10 md:pb-14"
     >
+      <Reveal>
       <div className="surface-matte mx-auto max-w-xl rounded-xl p-5 sm:p-8">
         <form onSubmit={onSubmit} className="relative space-y-5" noValidate>
           {/* Honeypot — hidden from users, bots often fill it */}
@@ -150,6 +152,7 @@ export function ContactSection() {
           ) : null}
         </form>
       </div>
+      </Reveal>
     </Section>
   );
 }
