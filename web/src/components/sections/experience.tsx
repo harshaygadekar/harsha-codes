@@ -12,7 +12,6 @@ export function ExperienceSection() {
       id="experience"
       title="Experience"
       description="Production work with measurable impact."
-      index="01"
     >
       <Reveal variant="stagger">
         <ol className="relative space-y-6">
@@ -74,9 +73,6 @@ export function ExperienceSection() {
 
       <Reveal className="mt-12 md:mt-14" delay={0.06}>
         <header className="mb-6 md:mb-8">
-          <p className="section-eyebrow" aria-hidden>
-            Education
-          </p>
           <h3 className={cn(sectionTitleClass)}>Education</h3>
         </header>
         <Reveal

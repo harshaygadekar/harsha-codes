@@ -200,7 +200,6 @@ export function ProjectsSection() {
       id="projects"
       title="Projects"
       description="Recruiter-focused impact — not a feature dump."
-      index="02"
     >
       <Reveal
         variant="stagger"
@@ -232,9 +231,6 @@ export function ProjectsSection() {
       {portfolio.publications.length > 0 ? (
         <Reveal className="mt-12 md:mt-14" delay={0.05}>
           <header className="mb-6 md:mb-8">
-            <p className="section-eyebrow" aria-hidden>
-              Research
-            </p>
             <h3 className={sectionTitleClass}>Research</h3>
           </header>
           {/* Full-width cards — same content max width as bento grid above */}

@@ -8,8 +8,6 @@ interface SectionProps {
   children: React.ReactNode;
   className?: string;
   headingClassName?: string;
-  /** Small eyebrow label above title (e.g. "01") */
-  index?: string;
   /** Align heading block with centered content (e.g. contact form) */
   align?: "start" | "center";
 }
@@ -25,7 +23,6 @@ export function Section({
   children,
   className,
   headingClassName,
-  index,
   align = "start",
 }: SectionProps) {
   const centered = align === "center";
@@ -46,27 +43,6 @@ export function Section({
                 headingClassName,
               )}
             >
-              {index ? (
-                <p
-                  className={cn(
-                    "section-eyebrow",
-                    centered && "justify-center before:hidden",
-                  )}
-                  aria-hidden
-                >
-                  {index}
-                </p>
-              ) : (
-                <p
-                  className={cn(
-                    "section-eyebrow",
-                    centered && "justify-center before:hidden",
-                  )}
-                  aria-hidden
-                >
-                  {title}
-                </p>
-              )}
               <h2 id={`${id}-heading`} className={sectionTitleClass}>
                 {title}
               </h2>

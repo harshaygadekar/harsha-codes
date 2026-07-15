@@ -75,7 +75,6 @@ export function ContactSection() {
       title="Contact"
       description="Open to software engineering roles in Bengaluru or remote India."
       className="pb-10 md:pb-14"
-      index="06"
       align="center"
     >
       <Reveal>
