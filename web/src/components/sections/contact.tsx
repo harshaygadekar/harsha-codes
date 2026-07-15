@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Send } from "lucide-react";
 import { portfolio } from "@/content/portfolio";
 import { Section } from "@/components/layout/section";
+import { Reveal } from "@/components/layout/reveal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -58,11 +59,16 @@ export function ContactSection() {
       id="contact"
       title="Contact"
       description="Open to software engineering roles in Bengaluru or remote India."
+      className="pb-10 md:pb-14"
     >
+      <Reveal>
       <div className="surface-matte mx-auto max-w-xl rounded-xl p-5 sm:p-8">
-        <form onSubmit={onSubmit} className="space-y-4" noValidate>
+        <form onSubmit={onSubmit} className="relative space-y-5" noValidate>
           {/* Honeypot — hidden from users, bots often fill it */}
-          <div className="absolute -left-[9999px] top-auto h-0 w-0 overflow-hidden" aria-hidden>
+          <div
+            className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden"
+            aria-hidden
+          >
             <label htmlFor="website">Website</label>
             <input
               id="website"
@@ -73,7 +79,7 @@ export function ContactSection() {
             />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label htmlFor="name" className="text-sm font-medium">
               Name
             </label>
@@ -84,10 +90,11 @@ export function ContactSection() {
               autoComplete="name"
               placeholder="Your name"
               disabled={status === "loading"}
+              className="h-10"
             />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label htmlFor="email" className="text-sm font-medium">
               Email
             </label>
@@ -99,10 +106,11 @@ export function ContactSection() {
               autoComplete="email"
               placeholder="you@company.com"
               disabled={status === "loading"}
+              className="h-10"
             />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label htmlFor="message" className="text-sm font-medium">
               Message
             </label>
@@ -113,18 +121,18 @@ export function ContactSection() {
               rows={5}
               placeholder="What are you building?"
               disabled={status === "loading"}
-              className="min-h-28 resize-y"
+              className="min-h-32 resize-y"
             />
           </div>
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between">
             <Button type="submit" disabled={status === "loading"} size="lg">
               <Send data-icon="inline-start" />
               {status === "loading" ? "Sending…" : "Send message"}
             </Button>
             <a
               href={`mailto:${portfolio.person.email}`}
-              className="text-sm text-muted-foreground hover:text-foreground"
+              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               or email directly
             </a>
@@ -132,18 +140,19 @@ export function ContactSection() {
 
           {message ? (
             <p
-              role="status"
+              role={status === "error" ? "alert" : "status"}
               className={
                 status === "ok"
-                  ? "text-sm text-primary"
-                  : "text-sm text-destructive"
+                  ? "rounded-md border border-primary/20 bg-primary/5 px-3 py-2 text-sm text-foreground"
+                  : "rounded-md border border-destructive/25 bg-destructive/5 px-3 py-2 text-sm text-destructive"
               }
             >
-              {message}
+              {status === "error" ? `Error: ${message}` : message}
             </p>
           ) : null}
         </form>
       </div>
+      </Reveal>
     </Section>
   );
 }

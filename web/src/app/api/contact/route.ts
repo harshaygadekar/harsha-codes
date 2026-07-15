@@ -1,12 +1,6 @@
 import { NextResponse } from "next/server";
 import { portfolio } from "@/content/portfolio";
-
-interface Body {
-  name?: string;
-  email?: string;
-  message?: string;
-  website?: string;
-}
+import { validateContact } from "@/lib/contact";
 
 // Simple in-process rate limit (ponytail: enough for v1)
 const hits = new Map<string, number[]>();
@@ -36,9 +30,9 @@ export async function POST(req: Request) {
     );
   }
 
-  let body: Body;
+  let body: unknown;
   try {
-    body = (await req.json()) as Body;
+    body = await req.json();
   } catch {
     return NextResponse.json(
       { ok: false, error: "Invalid request body." },
@@ -46,35 +40,26 @@ export async function POST(req: Request) {
     );
   }
 
-  // Honeypot filled → pretend success
-  if (body.website) {
+  const parsed = body as {
+    name?: string;
+    email?: string;
+    message?: string;
+    website?: string;
+  };
+
+  const validation = validateContact(parsed);
+  if (!validation.ok) {
+    return NextResponse.json(
+      { ok: false, error: validation.error },
+      { status: 400 },
+    );
+  }
+
+  if (validation.honeypot) {
     return NextResponse.json({ ok: true });
   }
 
-  const name = body.name?.trim() ?? "";
-  const email = body.email?.trim() ?? "";
-  const message = body.message?.trim() ?? "";
-
-  if (!name || !email || !message) {
-    return NextResponse.json(
-      { ok: false, error: "Name, email, and message are required." },
-      { status: 400 },
-    );
-  }
-
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return NextResponse.json(
-      { ok: false, error: "Enter a valid email address." },
-      { status: 400 },
-    );
-  }
-
-  if (message.length > 5000) {
-    return NextResponse.json(
-      { ok: false, error: "Message is too long." },
-      { status: 400 },
-    );
-  }
+  const { name, email, message } = validation;
 
   // If RESEND_API_KEY is set, send real email. Otherwise log + accept.
   // Source: https://resend.com/docs/api-reference/emails/send-email

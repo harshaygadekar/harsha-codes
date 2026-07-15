@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { FadeIn } from "@/components/layout/fade-in";
+import { Reveal } from "@/components/layout/reveal";
 
 interface SectionProps {
   id: string;
@@ -22,12 +22,12 @@ export function Section({
     <section
       id={id}
       aria-labelledby={title ? `${id}-heading` : undefined}
-      className={cn("scroll-mt-24 py-16 md:py-24", className)}
+      className={cn("scroll-mt-24 py-12 md:py-16", className)}
     >
       <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
         {title ? (
-          <FadeIn>
-            <header className={cn("mb-8 md:mb-10", headingClassName)}>
+          <Reveal>
+            <header className={cn("mb-6 md:mb-8", headingClassName)}>
               <h2
                 id={`${id}-heading`}
                 className="text-2xl font-semibold tracking-tight md:text-3xl"
@@ -35,14 +35,14 @@ export function Section({
                 {title}
               </h2>
               {description ? (
-                <p className="mt-2 max-w-2xl text-sm text-muted-foreground md:text-base">
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-[15px]">
                   {description}
                 </p>
               ) : null}
             </header>
-          </FadeIn>
+          </Reveal>
         ) : null}
-        <FadeIn>{children}</FadeIn>
+        {children}
       </div>
     </section>
   );

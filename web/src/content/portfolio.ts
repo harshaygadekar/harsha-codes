@@ -157,28 +157,6 @@ export const portfolio: PortfolioContent = {
       publication: "IEEE ICAUC 2026",
     },
     {
-      id: "prep-ai",
-      title: "Prep AI",
-      summary:
-        "Full-stack AI interview prep platform with real-time voice interviews, multi-dimensional scoring, and multi-tenant org isolation.",
-      highlights: [
-        "Voice interviews via Retell AI with persona interviewers",
-        "Sub-second scoring on Groq (Mixtral / Llama 3 70B)",
-        "Clerk multi-tenant auth with org-level access control",
-      ],
-      technologies: [
-        "Next.js",
-        "TypeScript",
-        "PostgreSQL",
-        "Prisma",
-        "Clerk",
-        "Groq",
-        "Retell",
-      ],
-      heroMetric: "Sub-second AI scoring · real-time voice",
-      github: "https://github.com/harshaygadekar/prep.ai",
-    },
-    {
       id: "verifyai",
       title: "VerifyAI",
       summary:
@@ -191,19 +169,6 @@ export const portfolio: PortfolioContent = {
       technologies: ["Next.js", "TypeScript", "Tailwind", "Firecrawl", "Groq"],
       github: "https://github.com/harshaygadekar/VerifyAI",
     },
-    {
-      id: "chat-docs",
-      title: "Chat With Your Documents",
-      summary:
-        "Personal document summarizer and chat interface over uploaded PDFs using Meta LLaMA-3 and FastEmbed.",
-      highlights: [
-        "PDF upload → concise summary → follow-up chat",
-        "LLaMA-3 inference with FastEmbed embeddings",
-        "Streamlit UI for fast iteration",
-      ],
-      technologies: ["Python", "LLaMA-3", "Streamlit", "FastEmbed"],
-      github: "https://github.com/harshaygadekar/chat-with-your-documents-2",
-    },
   ],
   publications: [
     {
@@ -215,17 +180,10 @@ export const portfolio: PortfolioContent = {
       role: "Co-Author",
       github: "https://github.com/harshaygadekar/role-based-context-compression",
     },
-    {
-      id: "neuron-ai-2023",
-      title: "Neuron-AI",
-      venue: "Tech Horizon 2023, Srinivasa University, Mangalore",
-      date: "Dec 2023",
-      role: "Co-Author",
-      note: "Presented to faculty and industry panel; recognized among 120+ submissions.",
-    },
   ],
   tech: [
-    { name: "Java", category: "languages", icon: "java" },
+    // icon = simple-icons slug (java is openjdk — "java" 404s on the CDN)
+    { name: "Java", category: "languages", icon: "openjdk" },
     { name: "Python", category: "languages", icon: "python" },
     { name: "TypeScript", category: "languages", icon: "typescript" },
     { name: "SQL / Postgres", category: "languages", icon: "postgresql" },

@@ -2,6 +2,7 @@ import type { ComponentType } from "react";
 import { Code2, Briefcase, Mail, AtSign } from "lucide-react";
 import { enabledSocial } from "@/content/portfolio";
 import { Section } from "@/components/layout/section";
+import { Reveal, RevealItem } from "@/components/layout/reveal";
 import { ExternalLink } from "@/components/layout/external-link";
 import type { SocialPlatform } from "@/types/portfolio";
 import { cn } from "@/lib/utils";
@@ -23,30 +24,38 @@ export function SocialSection() {
       title="Connect"
       description="Find me where I ship code and talk shop."
     >
-      <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <Reveal
+        variant="stagger"
+        as="ul"
+        className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
+      >
         {enabledSocial.map((item, i) => {
           const Icon = icons[item.id];
           const featured = i === 0;
 
           return (
-            <li
+            <RevealItem
               key={item.id}
+              as="li"
               className={cn(
-                "surface-matte group rounded-xl transition-transform duration-200 hover:-translate-y-0.5",
+                "surface-interactive group rounded-xl",
                 featured && "sm:col-span-2 lg:col-span-1",
               )}
             >
               <ExternalLink
                 href={item.href}
                 showMark={false}
-                className="flex h-full flex-col gap-4 p-5 focus-visible:rounded-xl"
+                className="flex h-full flex-col gap-4 rounded-xl p-5 outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 aria-label={`${item.label}${item.metric ? `, ${item.metric} ${item.metricLabel ?? ""}` : ""}`}
               >
                 <div className="flex items-start justify-between gap-3">
-                  <span className="flex size-10 items-center justify-center rounded-lg bg-accent text-primary">
+                  <span className="flex size-10 items-center justify-center rounded-lg bg-muted text-primary ring-1 ring-border/60">
                     <Icon className="size-5" aria-hidden />
                   </span>
-                  <span className="text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100">
+                  <span
+                    className="text-sm text-muted-foreground opacity-40 transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100"
+                    aria-hidden
+                  >
                     ↗
                   </span>
                 </div>
@@ -54,16 +63,16 @@ export function SocialSection() {
                   <p className="font-medium tracking-tight">{item.label}</p>
                   {item.metric ? (
                     <p className="mt-1 font-mono text-xs text-muted-foreground">
-                      <span className="text-foreground">{item.metric}</span>
+                      <span className="text-foreground/90">{item.metric}</span>
                       {item.metricLabel ? ` · ${item.metricLabel}` : null}
                     </p>
                   ) : null}
                 </div>
               </ExternalLink>
-            </li>
+            </RevealItem>
           );
         })}
-      </ul>
+      </Reveal>
     </Section>
   );
 }
