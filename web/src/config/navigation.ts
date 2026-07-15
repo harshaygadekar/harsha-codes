@@ -7,7 +7,10 @@ export interface NavItem {
   keywords?: string[];
 }
 
-/** Single source for header, scrollspy, and command palette. */
+/**
+ * Order matches page section flow:
+ * Hero → Experience → Projects → Tech → GitHub → Connect → Contact
+ */
 export const navigation: NavItem[] = [
   {
     id: "hero",
@@ -15,12 +18,6 @@ export const navigation: NavItem[] = [
     label: "Home",
     inHeader: true,
     keywords: ["top", "about", "intro"],
-  },
-  {
-    id: "social",
-    href: "/#social",
-    label: "Connect",
-    keywords: ["social", "links", "github", "linkedin"],
   },
   {
     id: "experience",
@@ -47,6 +44,12 @@ export const navigation: NavItem[] = [
     href: "/#github",
     label: "GitHub",
     keywords: ["activity", "repos", "contributions"],
+  },
+  {
+    id: "social",
+    href: "/#social",
+    label: "Connect",
+    keywords: ["social", "links", "github", "linkedin"],
   },
   {
     id: "contact",

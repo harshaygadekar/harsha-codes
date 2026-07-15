@@ -23,7 +23,7 @@ export function SocialSection() {
       id="social"
       title="Connect"
       description="Find me where I ship code and talk shop."
-      index="01"
+      index="05"
     >
       <Reveal
         variant="stagger"

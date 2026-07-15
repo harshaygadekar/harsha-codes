@@ -19,7 +19,7 @@ export async function GitHubSection() {
       id="github"
       title="GitHub activity"
       description="Recent public work and contribution cadence."
-      index="05"
+      index="04"
     >
       <Reveal>
         <div className="surface-matte overflow-x-auto rounded-2xl p-5 sm:p-7">

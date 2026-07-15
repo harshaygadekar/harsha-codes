@@ -59,7 +59,7 @@ export function TechSection() {
       id="tech"
       title="Tech stack"
       description="Tools I use to ship production systems."
-      index="04"
+      index="03"
     >
       <div className="space-y-7">
         {(Object.keys(labels) as Array<keyof typeof labels>).map((key, i) => (

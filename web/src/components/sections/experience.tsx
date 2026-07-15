@@ -11,7 +11,7 @@ export function ExperienceSection() {
       id="experience"
       title="Experience"
       description="Production work with measurable impact."
-      index="02"
+      index="01"
     >
       <Reveal variant="stagger">
         <ol className="relative space-y-6">

@@ -41,18 +41,9 @@ export function SiteHeader() {
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-4 sm:h-15 sm:px-6">
         <Link
           href="/#hero"
-          className="group flex items-center gap-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+          className="rounded-lg text-sm font-semibold tracking-tight text-foreground transition-colors hover:text-foreground/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
         >
-          <span
-            className="flex size-7 items-center justify-center rounded-lg text-[11px] font-bold tracking-tight text-white shadow-sm"
-            style={{ background: "var(--brand)" }}
-            aria-hidden
-          >
-            H
-          </span>
-          <span className="text-sm font-semibold tracking-tight text-foreground transition-colors group-hover:text-foreground/80">
-            {portfolio.brand}
-          </span>
+          {portfolio.brand}
         </Link>
 
         <nav
