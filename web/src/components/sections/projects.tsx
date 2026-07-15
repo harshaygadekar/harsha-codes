@@ -1,4 +1,4 @@
-import { ArrowUpRight, FileText } from "lucide-react";
+import { ArrowUpRight, Code2, FileText } from "lucide-react";
 import { portfolio } from "@/content/portfolio";
 import type { ProjectItem } from "@/types/portfolio";
 import { Section } from "@/components/layout/section";
@@ -6,32 +6,59 @@ import { Reveal, RevealItem } from "@/components/layout/reveal";
 import { ExternalLink } from "@/components/layout/external-link";
 import { cn } from "@/lib/utils";
 
-function TechPills({ technologies }: { technologies: string[] }) {
+/** Compact mono chips — fixed height, even padding */
+function TechPills({
+  technologies,
+  max = 4,
+}: {
+  technologies: string[];
+  max?: number;
+}) {
+  const shown = technologies.slice(0, max);
+  const extra = technologies.length - shown.length;
+
   return (
     <ul className="flex flex-wrap gap-1.5" aria-label="Technologies">
-      {technologies.map((t) => (
+      {shown.map((t) => (
         <li key={t}>
-          <span className="inline-flex h-7 items-center rounded-md border border-border/80 bg-muted/40 px-2.5 font-mono text-[11px] text-muted-foreground">
+          <span className="inline-flex h-6 items-center rounded-md border border-border/70 bg-muted/30 px-2 font-mono text-[10px] leading-none text-muted-foreground">
             {t}
           </span>
         </li>
       ))}
+      {extra > 0 ? (
+        <li>
+          <span className="inline-flex h-6 items-center rounded-md px-1.5 font-mono text-[10px] leading-none text-muted-foreground/80">
+            +{extra}
+          </span>
+        </li>
+      ) : null}
     </ul>
   );
 }
 
-function ProjectActions({ project }: { project: ProjectItem }) {
+function ProjectLinks({
+  project,
+  compact = false,
+}: {
+  project: ProjectItem;
+  compact?: boolean;
+}) {
   return (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+    <div className="flex min-h-7 flex-wrap items-center gap-2">
       {project.github ? (
         <a
           href={project.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-8 items-center gap-1.5 rounded-lg border border-border bg-background px-3 text-xs font-medium text-foreground transition-colors hover:bg-muted"
+          className={cn(
+            "inline-flex h-7 items-center gap-1.5 rounded-md border border-border bg-background/80 font-medium text-foreground transition-colors hover:bg-muted",
+            compact ? "px-2.5 text-[11px]" : "px-3 text-xs",
+          )}
         >
-          View on GitHub
-          <ArrowUpRight className="size-3.5 opacity-60" aria-hidden />
+          <Code2 className="size-3.5 opacity-70" aria-hidden />
+          {compact ? "Code" : "GitHub"}
+          <ArrowUpRight className="size-3 opacity-50" aria-hidden />
         </a>
       ) : null}
       {project.demo ? (
@@ -39,139 +66,134 @@ function ProjectActions({ project }: { project: ProjectItem }) {
           href={project.demo}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-8 items-center gap-1.5 rounded-lg px-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+          className="inline-flex h-7 items-center gap-1 rounded-md px-2 text-[11px] font-medium text-muted-foreground transition-colors hover:text-foreground"
         >
-          Live demo
-          <ArrowUpRight className="size-3.5 opacity-60" aria-hidden />
+          Demo
+          <ArrowUpRight className="size-3 opacity-50" aria-hidden />
         </a>
       ) : null}
       {project.publication ? (
-        <span className="inline-flex h-8 items-center gap-1.5 text-xs text-muted-foreground">
-          <FileText className="size-3.5 shrink-0" aria-hidden />
-          {project.publication}
+        <span className="inline-flex h-7 max-w-full items-center gap-1 text-[11px] text-muted-foreground">
+          <FileText className="size-3 shrink-0 opacity-70" aria-hidden />
+          <span className="truncate">{project.publication}</span>
         </span>
       ) : null}
     </div>
   );
 }
 
-function ProjectFooter({ project }: { project: ProjectItem }) {
-  return (
-    <div className="mt-auto pt-5">
-      {/* Tech row — clear breathing room, no shared collision with actions */}
-      <div className="pb-4">
-        <TechPills technologies={project.technologies} />
-      </div>
-      {/* Actions sit under a clean hairline with fixed vertical rhythm */}
-      <div className="border-t border-border pt-4">
-        <ProjectActions project={project} />
-      </div>
-    </div>
-  );
+/**
+ * Minimal bento mosaic (4 projects):
+ *  ┌──────────┬─────┐
+ *  │  hero    │  2  │
+ *  │  (tall)  ├─────┤
+ *  │          │  3  │
+ *  ├──────────┴─────┤
+ *  │      wide 4    │
+ *  └────────────────┘
+ */
+function bentoCellClass(index: number): string {
+  if (index === 0) return "sm:row-span-2";
+  if (index === 3) return "sm:col-span-2";
+  return "";
 }
 
-function FeaturedProject({ project }: { project: ProjectItem }) {
-  return (
-    <article className="surface-elevated-hover overflow-hidden rounded-2xl">
-      <div className="grid md:grid-cols-[1.4fr_1fr]">
-        <div className="flex flex-col p-6 sm:p-8">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-primary">
-              Featured
-            </span>
-            {project.heroMetric ? (
-              <span className="rounded-md bg-primary/10 px-2 py-0.5 font-mono text-[11px] font-medium text-primary">
-                {project.heroMetric}
-              </span>
-            ) : null}
-          </div>
-          <h3 className="mt-3 text-xl font-semibold tracking-tight sm:text-2xl">
-            {project.title}
-          </h3>
-          <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
-            {project.summary}
-          </p>
-          <ProjectFooter project={project} />
-        </div>
-
-        <div className="flex flex-col border-t border-border bg-muted/25 p-6 sm:p-8 md:border-l md:border-t-0">
-          <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
-            Highlights
-          </p>
-          <ul className="mt-4 space-y-3.5">
-            {project.highlights.slice(0, 3).map((h) => (
-              <li key={h} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
-                <span
-                  className="mt-2 size-1.5 shrink-0 rounded-full bg-primary"
-                  aria-hidden
-                />
-                <span className="text-foreground/85">{h}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </article>
-  );
-}
-
-function ProjectRow({
+function BentoCard({
   project,
   index,
+  tall,
+  wide,
 }: {
   project: ProjectItem;
   index: number;
+  tall?: boolean;
+  wide?: boolean;
 }) {
+  const techMax = tall ? 5 : wide ? 6 : 3;
+
   return (
     <article
       className={cn(
-        "surface-elevated-hover flex flex-col rounded-2xl p-6 sm:p-7",
-        "sm:flex-row sm:gap-8",
+        "surface-elevated-hover flex h-full flex-col rounded-2xl p-5 sm:p-6",
+        tall && "min-h-[300px] sm:min-h-full",
+        wide && "min-h-[200px]",
+        !tall && !wide && "min-h-[220px]",
       )}
     >
-      <div className="flex min-w-0 flex-1 flex-col">
-        <div className="flex items-start justify-between gap-4">
-          <div className="min-w-0">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="font-mono text-[11px] tabular-nums text-muted-foreground">
-                {String(index).padStart(2, "0")}
+      <header className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="font-mono text-[10px] tabular-nums text-muted-foreground">
+              {String(index).padStart(2, "0")}
+            </span>
+            {tall ? (
+              <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-primary">
+                Featured
               </span>
-              <h3 className="text-lg font-semibold tracking-tight">
-                {project.title}
-              </h3>
-            </div>
-            {project.heroMetric ? (
-              <p className="mt-1.5 font-mono text-[11px] text-primary">
-                {project.heroMetric}
-              </p>
             ) : null}
           </div>
+          <h3
+            className={cn(
+              "mt-2 font-semibold tracking-tight text-balance",
+              tall ? "text-xl sm:text-2xl" : "text-base sm:text-lg",
+            )}
+          >
+            {project.title}
+          </h3>
         </div>
+        {project.heroMetric ? (
+          <span
+            className={cn(
+              "shrink-0 rounded-lg border border-primary/15 bg-primary/8 px-2 py-1 text-left font-mono font-medium leading-snug text-primary",
+              tall ? "text-[11px]" : "max-w-[8rem] text-[10px]",
+            )}
+          >
+            {project.heroMetric}
+          </span>
+        ) : null}
+      </header>
 
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          {project.summary}
-        </p>
+      <p
+        className={cn(
+          "mt-3 text-muted-foreground",
+          tall
+            ? "text-sm leading-relaxed sm:text-[15px] sm:leading-7"
+            : "line-clamp-3 text-sm leading-relaxed",
+        )}
+      >
+        {project.summary}
+      </p>
 
-        <ul className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
+      {tall ? (
+        <ul className="mt-4 space-y-2">
           {project.highlights.slice(0, 2).map((h) => (
-            <li key={h} className="flex gap-2.5">
+            <li
+              key={h}
+              className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground"
+            >
               <span
                 className="mt-2 size-1 shrink-0 rounded-full bg-primary/80"
                 aria-hidden
               />
-              <span>{h}</span>
+              <span className="line-clamp-2">{h}</span>
             </li>
           ))}
         </ul>
+      ) : null}
 
-        <ProjectFooter project={project} />
+      {/* Footer — tech then links; fixed rhythm, no collisions */}
+      <div className="mt-auto flex flex-col gap-3 pt-5">
+        <TechPills technologies={project.technologies} max={techMax} />
+        <div className="border-t border-border/80 pt-3">
+          <ProjectLinks project={project} compact={!tall} />
+        </div>
       </div>
     </article>
   );
 }
 
 export function ProjectsSection() {
-  const [featured, ...rest] = portfolio.projects;
+  const projects = portfolio.projects;
 
   return (
     <Section
@@ -180,54 +202,61 @@ export function ProjectsSection() {
       description="Recruiter-focused impact — not a feature dump."
       index="02"
     >
-      <div className="space-y-4 sm:space-y-5">
-        {featured ? (
-          <Reveal>
-            <FeaturedProject project={featured} />
-          </Reveal>
-        ) : null}
+      <Reveal
+        variant="stagger"
+        as="ul"
+        className="grid auto-rows-fr grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3 lg:gap-4"
+      >
+        {projects.map((project, i) => {
+          const tall = i === 0;
+          // Last tile full-width when even count (pairs the mosaic)
+          const isWide = i === projects.length - 1 && projects.length >= 4;
 
-        {rest.length > 0 ? (
-          <Reveal variant="stagger" as="ul" className="grid gap-4 sm:gap-5">
-            {rest.map((project, i) => (
-              <RevealItem key={project.id} as="li">
-                <ProjectRow project={project} index={i + 2} />
-              </RevealItem>
-            ))}
-          </Reveal>
-        ) : null}
-      </div>
+          return (
+            <RevealItem
+              key={project.id}
+              as="li"
+              className={cn(bentoCellClass(i), "h-full")}
+            >
+              <BentoCard
+                project={project}
+                index={i + 1}
+                tall={tall}
+                wide={isWide}
+              />
+            </RevealItem>
+          );
+        })}
+      </Reveal>
 
       {portfolio.publications.length > 0 ? (
-        <Reveal className="mt-14" delay={0.05}>
+        <Reveal className="mt-12" delay={0.05}>
           <h3 className="section-label mb-4">Research</h3>
-          <ul className="space-y-3">
+          <ul className="grid gap-3 sm:grid-cols-2">
             {portfolio.publications.map((pub) => (
               <li
                 key={pub.id}
-                className="surface-elevated-hover flex flex-col gap-3 rounded-2xl p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-8 sm:p-6"
+                className="surface-elevated-hover flex h-full flex-col rounded-2xl p-5 sm:p-6"
               >
-                <div className="min-w-0">
-                  <p className="font-mono text-xs text-primary">
-                    {pub.role} · {pub.venue}
+                <p className="font-mono text-xs text-primary">
+                  {pub.role} · {pub.venue}
+                </p>
+                <h4 className="mt-1.5 text-sm font-medium leading-snug tracking-tight sm:text-base">
+                  {pub.title}
+                </h4>
+                <p className="mt-1.5 font-mono text-xs text-muted-foreground">
+                  {pub.date}
+                </p>
+                {pub.note ? (
+                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+                    {pub.note}
                   </p>
-                  <h4 className="mt-1.5 text-sm font-medium leading-snug tracking-tight sm:text-base">
-                    {pub.title}
-                  </h4>
-                  <p className="mt-1.5 font-mono text-xs text-muted-foreground">
-                    {pub.date}
-                  </p>
-                  {pub.note ? (
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                      {pub.note}
-                    </p>
-                  ) : null}
-                </div>
-                <div className="flex shrink-0 flex-wrap items-center gap-x-4 gap-y-2 sm:pt-0.5">
+                ) : null}
+                <div className="mt-auto flex flex-wrap items-center gap-3 border-t border-border/80 pt-3">
                   {pub.github ? (
                     <ExternalLink
                       href={pub.github}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      className="inline-flex h-7 items-center text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
                     >
                       Code
                     </ExternalLink>
@@ -235,7 +264,7 @@ export function ProjectsSection() {
                   {pub.paperUrl ? (
                     <ExternalLink
                       href={pub.paperUrl}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      className="inline-flex h-7 items-center text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
                     >
                       Paper
                     </ExternalLink>
