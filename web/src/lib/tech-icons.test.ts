@@ -2,24 +2,17 @@ import { describe, expect, it } from "vitest";
 import { techIconUrl } from "./tech-icons";
 
 describe("techIconUrl", () => {
-  it("requests a white monochrome glyph for masking", () => {
-    expect(techIconUrl("python")).toBe(
-      "https://cdn.simpleicons.org/python/ffffff",
-    );
+  it("returns a local public path for the slug", () => {
+    expect(techIconUrl("python")).toBe("/icons/tech/python.svg");
   });
 
   it("encodes special characters in the slug", () => {
-    expect(techIconUrl("next.js")).toBe(
-      "https://cdn.simpleicons.org/next.js/ffffff",
-    );
+    expect(techIconUrl("next.js")).toBe("/icons/tech/next.js.svg");
   });
 
-  it("uses jsDelivr for amazonwebservices (missing on simpleicons CDN)", () => {
-    expect(techIconUrl("amazonwebservices")).toContain(
-      "cdn.jsdelivr.net/npm/simple-icons",
-    );
-    expect(techIconUrl("amazonwebservices")).toContain(
-      "amazonwebservices.svg",
+  it("maps amazonwebservices to a local path (no CDN)", () => {
+    expect(techIconUrl("amazonwebservices")).toBe(
+      "/icons/tech/amazonwebservices.svg",
     );
   });
 });

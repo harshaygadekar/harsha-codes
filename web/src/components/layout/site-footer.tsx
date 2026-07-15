@@ -8,7 +8,14 @@ export function SiteFooter() {
     <footer className="border-t border-border py-8">
       <div className="mx-auto flex max-w-5xl flex-col gap-4 px-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <p className="text-sm text-muted-foreground">
-          © {year} {portfolio.person.fullName}. Built with care.
+          © {year} {portfolio.person.fullName}. Built with care.{" "}
+          <span className="hidden sm:inline text-muted-foreground/80">
+            Press{" "}
+            <kbd className="rounded border border-border px-1 font-mono text-[10px]">
+              ⌘K
+            </kbd>{" "}
+            to jump.
+          </span>
         </p>
         <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
           <ExternalLink

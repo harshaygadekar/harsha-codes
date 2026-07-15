@@ -1,23 +1,41 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { portfolio } from "@/content/portfolio";
+import { headerNav } from "@/config/navigation";
+import { useActiveSection } from "@/hooks/use-active-section";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const nav = [
-  { href: "/#hero", label: "Home" },
-  { href: "/#experience", label: "Experience" },
-  { href: "/#projects", label: "Projects" },
-  { href: "/#contact", label: "Contact" },
-  { href: "/more", label: "More" },
-];
-
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const activeId = useActiveSection();
+
+  useEffect(() => {
+    if (!open) return;
+
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setOpen(false);
+        // Return focus after close
+        setTimeout(() => menuButtonRef.current?.focus(), 0);
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
+  function linkActive(href: string) {
+    if (href === "/more") return false;
+    const id = href.replace("/#", "");
+    return activeId === id;
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
@@ -33,19 +51,25 @@ export function SiteHeader() {
           className="hidden items-center gap-0.5 md:flex"
           aria-label="Primary"
         >
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors",
-                "hover:bg-muted hover:text-foreground",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {headerNav.map((item) => {
+            const active = linkActive(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "rounded-md px-3 py-1.5 text-sm transition-colors",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
+                  active
+                    ? "bg-muted font-medium text-foreground"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                )}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
           <div className="ml-2 border-l border-border pl-2">
             <ThemeToggle />
           </div>
@@ -54,6 +78,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-0.5 md:hidden">
           <ThemeToggle />
           <Button
+            ref={menuButtonRef}
             variant="ghost"
             size="icon-sm"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -76,17 +101,27 @@ export function SiteHeader() {
         hidden={!open}
       >
         <ul className="flex flex-col gap-0.5">
-          {nav.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="block rounded-md px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
+          {headerNav.map((item) => {
+            const active = linkActive(item.href);
+            return (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "block rounded-md px-3 py-2.5 text-sm transition-colors",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
+                    active
+                      ? "bg-muted font-medium text-foreground"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </header>

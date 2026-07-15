@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { CommandPalette } from "@/components/layout/command-palette";
 import { portfolio } from "@/content/portfolio";
 import "./globals.css";
 
@@ -54,7 +55,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: dark)", color: "#09090b" },
-    { media: "(prefers-color-scheme: light)", color: "#F7F7FB" },
+    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -108,6 +109,7 @@ export default function RootLayout({
             {children}
           </main>
           <SiteFooter />
+          <CommandPalette />
         </ThemeProvider>
       </body>
     </html>

@@ -31,19 +31,25 @@ describe("validateContact", () => {
     }
   });
 
-  it("rejects missing required fields", () => {
-    expect(validateContact({ name: "", email: "a@b.com", message: "x" }).ok).toBe(
-      false,
-    );
-    expect(validateContact({ name: "A", email: "", message: "x" }).ok).toBe(
-      false,
-    );
-    expect(validateContact({ name: "A", email: "a@b.com", message: "" }).ok).toBe(
-      false,
-    );
+  it("rejects missing required fields with field map", () => {
+    const result = validateContact({ name: "", email: "a@b.com", message: "x" });
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.fields?.name).toBeTruthy();
+    }
   });
 
-  it("rejects invalid email", () => {
+  it("flags only empty fields when several are missing", () => {
+    const result = validateContact({ name: "", email: "", message: "" });
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.fields?.name).toBeTruthy();
+      expect(result.fields?.email).toBeTruthy();
+      expect(result.fields?.message).toBeTruthy();
+    }
+  });
+
+  it("rejects invalid email with field error", () => {
     const result = validateContact({
       name: "A",
       email: "not-an-email",
@@ -51,6 +57,7 @@ describe("validateContact", () => {
     });
     expect(result.ok).toBe(false);
     if (!result.ok) {
+      expect(result.fields?.email).toMatch(/valid email/i);
       expect(result.error).toMatch(/valid email/i);
     }
   });
@@ -63,7 +70,7 @@ describe("validateContact", () => {
     });
     expect(result.ok).toBe(false);
     if (!result.ok) {
-      expect(result.error).toMatch(/too long/i);
+      expect(result.fields?.message).toMatch(/too long/i);
     }
   });
 

@@ -34,44 +34,44 @@
   --radius-xl: calc(var(--radius) * 1.4);
 }
 
-/* Light — polished secondary target */
+/* Light — polished secondary target (zinc-neutral, primary #111844) */
 :root {
-  --background: #f4f4f8;
-  --foreground: #0c0b1a;
+  --background: #fafafa;
+  --foreground: #18181b;
   --card: #ffffff;
-  --card-foreground: #0c0b1a;
+  --card-foreground: #18181b;
   --popover: #ffffff;
-  --popover-foreground: #0c0b1a;
+  --popover-foreground: #18181b;
   --primary: #111844;
   --primary-foreground: #ffffff;
-  --secondary: #eceaf6;
-  --secondary-foreground: #162e93;
-  --muted: #eceaf6;
-  --muted-foreground: #52525b; /* zinc-600 — stronger secondary text contrast */
-  --accent: #eceaf6;
-  --accent-foreground: #1a1953;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #111844;
+  --muted: #f4f4f5;
+  --muted-foreground: #52525b;
+  --accent: #f4f4f5;
+  --accent-foreground: #111844;
   --destructive: #dc2626;
-  --border: #e4e4e7; /* zinc-200 */
+  --border: #e4e4e7;
   --input: #e4e4e7;
   --ring: #111844;
   --surface: #ffffff;
   --surface-elevated: #ffffff;
   --radius: 0.625rem;
-  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.7) inset,
-    0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(24, 24, 27, 0.04);
-  --shadow-card-hover: 0 1px 0 rgba(255, 255, 255, 0.8) inset,
-    0 2px 4px rgba(0, 0, 0, 0.04), 0 12px 28px rgba(24, 24, 27, 0.08);
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(24, 24, 27, 0.05);
+  --shadow-card-hover: 0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 2px 4px rgba(0, 0, 0, 0.05), 0 12px 28px rgba(17, 24, 68, 0.08);
   --banner-glow: radial-gradient(
       120% 80% at 20% 40%,
-      rgba(17, 24, 68, 0.14),
+      rgba(17, 24, 68, 0.1),
       transparent 55%
     ),
     radial-gradient(
       90% 70% at 80% 20%,
-      rgba(22, 46, 147, 0.1),
+      rgba(17, 24, 68, 0.06),
       transparent 50%
     ),
-    linear-gradient(135deg, #eceaf6 0%, #f4f4f8 50%, #e4e4e7 100%);
+    linear-gradient(135deg, #f4f4f5 0%, #fafafa 50%, #e4e4e7 100%);
 }
 
 /* Dark — charcoal / zinc surfaces; brand blue only on primary CTAs */
@@ -156,11 +156,26 @@
       box-shadow 150ms ease;
   }
 
+  /* Non-link cards (projects): quiet elevation, no “whole card is a link” cue */
+  .surface-elevated-hover {
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+    transition:
+      border-color 150ms ease,
+      box-shadow 150ms ease;
+  }
+
   @media (hover: hover) and (pointer: fine) {
     .surface-interactive:hover {
       border-color: color-mix(in srgb, var(--primary) 22%, var(--border));
       box-shadow: var(--shadow-card-hover);
       transform: translateY(-1px);
+    }
+
+    .surface-elevated-hover:hover {
+      border-color: color-mix(in srgb, var(--primary) 18%, var(--border));
+      box-shadow: var(--shadow-card-hover);
     }
   }
 

@@ -23,7 +23,7 @@ export function ProjectsSection() {
           <RevealItem
             key={project.id}
             as="li"
-            className="surface-matte flex flex-col rounded-xl p-5 sm:p-6"
+            className="surface-elevated-hover flex flex-col rounded-xl p-5 sm:p-6"
           >
             <div className="flex items-start justify-between gap-3">
               <h3 className="text-base font-semibold tracking-tight sm:text-lg">
@@ -109,7 +109,7 @@ export function ProjectsSection() {
               <RevealItem
                 key={pub.id}
                 as="li"
-                className="surface-matte rounded-xl p-5"
+                className="surface-elevated-hover rounded-xl p-5"
               >
                 <p className="font-mono text-xs text-primary">
                   {pub.role} · {pub.venue}
