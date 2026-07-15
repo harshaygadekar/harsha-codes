@@ -28,7 +28,7 @@ export function rankRepos<T extends RankableRepo>(
 
 export function contributionChartUrl(
   username: string,
-  color = "2F2FE4",
+  color = "111844",
 ): string {
   const safeUser = encodeURIComponent(username);
   const safeColor = encodeURIComponent(color);

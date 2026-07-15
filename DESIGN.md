@@ -92,10 +92,10 @@ Leaf components (only when reused): `Section`, `ExternalLink`, `TechChip`, `Proj
 | `--muted` | `#9B9BB0` | `#5C5C72` | Secondary text |
 | `--border` | `#1E1C35` | `#E2E0EE` | Hairlines |
 | `--card` | `#0E0C1C` | `#FFFFFF` | Surfaces |
-| `--primary` | `#2F2FE4` | `#2F2FE4` | Actions / focus |
+| `--primary` | `#111844` | `#111844` | Actions / focus |
 | `--secondary` | `#162E93` | `#162E93` | Depth accents |
 | `--accent` | `#1A1953` | `#E8E7F5` | Soft fills |
-| `--ring` | `#2F2FE4` | `#2F2FE4` | Focus |
+| `--ring` | `#111844` | `#111844` | Focus |
 
 Matte surfaces: solid fills + 1px border + soft shadow (`0 1px 0 rgba(255,255,255,0.04) inset`, `0 8px 24px rgba(0,0,0,0.35)`). No glass blur.
 
@@ -198,7 +198,7 @@ Mobile is designed first for hero (stack banner → avatar row → text → CTAs
 | Over-animation | Cap motion to section fade + hover; reduced-motion hard stop |
 | Giant section files | Cap ~150 lines; extract cards |
 | Content drift from md | Comment at top of `portfolio.ts`: keep in sync with `portfolio-data.md` |
-| a11y: contrast on `#2F2FE4` | Primary buttons use white text; never primary-on-dark body text for long copy |
+| a11y: contrast on `#111844` | Primary buttons use white text; never primary-on-dark body text for long copy |
 | Mobile nav overflow | Hamburger only if needed; prefer horizontal scroll-free anchor list |
 
 **Visual consistency checklist:** one card radius, one border color, one primary button style, mono for metrics only.

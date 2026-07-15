@@ -42,7 +42,7 @@
   --card-foreground: #0c0b1a;
   --popover: #ffffff;
   --popover-foreground: #0c0b1a;
-  --primary: #2f2fe4;
+  --primary: #111844;
   --primary-foreground: #ffffff;
   --secondary: #eceaf6;
   --secondary-foreground: #162e93;
@@ -53,7 +53,7 @@
   --destructive: #dc2626;
   --border: #e4e4e7; /* zinc-200 */
   --input: #e4e4e7;
-  --ring: #2f2fe4;
+  --ring: #111844;
   --surface: #ffffff;
   --surface-elevated: #ffffff;
   --radius: 0.625rem;
@@ -63,7 +63,7 @@
     0 2px 4px rgba(0, 0, 0, 0.04), 0 12px 28px rgba(24, 24, 27, 0.08);
   --banner-glow: radial-gradient(
       120% 80% at 20% 40%,
-      rgba(47, 47, 228, 0.14),
+      rgba(17, 24, 68, 0.14),
       transparent 55%
     ),
     radial-gradient(
@@ -82,7 +82,7 @@
   --card-foreground: #fafafa;
   --popover: #18181b;
   --popover-foreground: #fafafa;
-  --primary: #2f2fe4;
+  --primary: #111844;
   --primary-foreground: #ffffff;
   --secondary: #27272a; /* zinc-800 */
   --secondary-foreground: #fafafa;
@@ -94,7 +94,7 @@
   /* Between zinc-800 and zinc-700 — edges readable, still matte */
   --border: #2e2e33;
   --input: #2e2e33;
-  --ring: #2f2fe4;
+  --ring: #111844;
   --surface: #18181b;
   --surface-elevated: #1c1c1f;
   --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
@@ -103,7 +103,7 @@
     0 2px 4px rgba(0, 0, 0, 0.4), 0 14px 32px rgba(0, 0, 0, 0.45);
   --banner-glow: radial-gradient(
       120% 80% at 15% 50%,
-      rgba(47, 47, 228, 0.16),
+      rgba(17, 24, 68, 0.28),
       transparent 55%
     ),
     radial-gradient(

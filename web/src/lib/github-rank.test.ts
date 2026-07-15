@@ -69,7 +69,7 @@ describe("rankRepos", () => {
 describe("contributionChartUrl", () => {
   it("builds the public chart URL", () => {
     expect(contributionChartUrl("harshaygadekar")).toBe(
-      "https://ghchart.rshah.org/2F2FE4/harshaygadekar",
+      "https://ghchart.rshah.org/111844/harshaygadekar",
     );
   });
 
