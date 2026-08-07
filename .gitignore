@@ -28,3 +28,6 @@ npm-debug.log*
 yarn-debug.log*
 pnpm-debug.log*
 .gstack/
+
+# local content draft (not part of the deployed site)
+portfolio-data.md
