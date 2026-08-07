@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 import { navigation, type NavItem } from "@/config/navigation";
+import { useSmoothScrollTo } from "@/components/layout/smooth-scroll";
 import { cn } from "@/lib/utils";
 
 function filterItems(query: string): NavItem[] {
@@ -19,6 +20,7 @@ function filterItems(query: string): NavItem[] {
 
 export function CommandPalette() {
   const router = useRouter();
+  const scrollTo = useSmoothScrollTo();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [index, setIndex] = useState(0);
@@ -48,7 +50,7 @@ export function CommandPalette() {
         }
         const el = document.getElementById(id);
         if (el) {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          scrollTo(el);
           history.replaceState(null, "", item.href);
         } else {
           router.push(item.href);
@@ -57,7 +59,7 @@ export function CommandPalette() {
         router.push(item.href);
       }
     },
-    [close, router],
+    [close, router, scrollTo],
   );
 
   useEffect(() => {
@@ -117,7 +119,7 @@ export function CommandPalette() {
         role="dialog"
         aria-modal="true"
         aria-labelledby="command-palette-title"
-        className="surface-matte relative z-[101] w-full max-w-md overflow-hidden rounded-xl shadow-lg"
+        className="relative z-[101] w-full max-w-md overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-soft)]"
       >
         <h2 id="command-palette-title" className="sr-only">
           Jump to section

@@ -10,11 +10,13 @@ interface SectionProps {
   headingClassName?: string;
   /** Align heading block with centered content (e.g. contact form) */
   align?: "start" | "center";
+  /** Softer muted label style (editorial inspo) vs larger title */
+  tone?: "label" | "title";
 }
 
-/** Shared title scale — main sections + Education / Research */
+/** Shared title scale — reserved for rare emphasis */
 export const sectionTitleClass =
-  "text-[1.65rem] font-semibold tracking-tight text-balance sm:text-3xl md:text-[2rem] md:leading-tight";
+  "text-lg font-medium tracking-tight text-foreground sm:text-xl";
 
 export function Section({
   id,
@@ -24,6 +26,7 @@ export function Section({
   className,
   headingClassName,
   align = "start",
+  tone = "label",
 }: SectionProps) {
   const centered = align === "center";
 
@@ -31,26 +34,33 @@ export function Section({
     <section
       id={id}
       aria-labelledby={title ? `${id}-heading` : undefined}
-      className={cn("scroll-mt-24 py-10 md:py-14", className)}
+      className={cn("scroll-mt-28 py-10 md:py-14", className)}
     >
-      <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
+      <div className="content-column">
         {title ? (
           <Reveal>
             <header
               className={cn(
                 "mb-6 md:mb-8",
-                centered && "mx-auto max-w-xl text-center",
+                centered && "text-center",
                 headingClassName,
               )}
             >
-              <h2 id={`${id}-heading`} className={sectionTitleClass}>
+              <h2
+                id={`${id}-heading`}
+                className={cn(
+                  tone === "label"
+                    ? "section-label"
+                    : sectionTitleClass,
+                )}
+              >
                 {title}
               </h2>
               {description ? (
                 <p
                   className={cn(
-                    "mt-3 text-[15px] leading-relaxed text-muted-foreground",
-                    centered ? "mx-auto max-w-xl" : "max-w-xl",
+                    "mt-2 text-[15px] leading-relaxed text-muted-foreground",
+                    centered && "mx-auto max-w-md",
                   )}
                 >
                   {description}

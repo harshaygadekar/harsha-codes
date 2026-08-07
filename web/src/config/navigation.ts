@@ -9,7 +9,7 @@ export interface NavItem {
 
 /**
  * Order matches page section flow:
- * Hero → Experience → Projects → Tech → GitHub → Connect → Contact
+ * Hero → Experience → Projects → Tech → Education → GitHub → Connect → Contact
  */
 export const navigation: NavItem[] = [
   {
@@ -24,7 +24,7 @@ export const navigation: NavItem[] = [
     href: "/#experience",
     label: "Experience",
     inHeader: true,
-    keywords: ["work", "nokia", "job", "education"],
+    keywords: ["work", "nokia", "job"],
   },
   {
     id: "projects",
@@ -37,7 +37,13 @@ export const navigation: NavItem[] = [
     id: "tech",
     href: "/#tech",
     label: "Tech stack",
-    keywords: ["skills", "tools", "languages"],
+    keywords: ["skills", "tools", "backend", "ai", "stack"],
+  },
+  {
+    id: "education",
+    href: "/#education",
+    label: "Education",
+    keywords: ["school", "degree", "mca", "bca"],
   },
   {
     id: "github",
@@ -59,11 +65,11 @@ export const navigation: NavItem[] = [
     keywords: ["email", "hire", "message", "form"],
   },
   {
-    id: "more",
-    href: "/more",
-    label: "More",
+    id: "writing",
+    href: "/writing",
+    label: "Writing",
     inHeader: true,
-    keywords: ["extra", "soon"],
+    keywords: ["blog", "notes", "articles", "posts"],
   },
 ];
 

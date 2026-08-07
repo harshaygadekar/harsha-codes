@@ -2,13 +2,13 @@ import { techByCategory } from "@/content/portfolio";
 import { Section } from "@/components/layout/section";
 import { Reveal, RevealItem } from "@/components/layout/reveal";
 import { techIconUrl } from "@/lib/tech-icons";
-import { cn } from "@/lib/utils";
 
 const labels = {
-  languages: "Languages",
-  frameworks: "Frameworks",
-  tools: "Tools",
-  libraries: "Libraries",
+  backend: "backend",
+  ai: "ai",
+  frontend: "frontend",
+  infrastructure: "infrastructure",
+  databases: "databases",
 } as const;
 
 function TechIcon({ slug, label }: { slug: string; label: string }) {
@@ -18,7 +18,7 @@ function TechIcon({ slug, label }: { slug: string; label: string }) {
     <span
       aria-hidden
       title={label}
-      className="inline-block size-4 shrink-0 bg-foreground/80"
+      className="inline-block size-3.5 shrink-0 bg-foreground/70"
       style={{
         maskImage: `url(${url})`,
         maskSize: "contain",
@@ -35,42 +35,36 @@ function TechIcon({ slug, label }: { slug: string; label: string }) {
 
 function TechChip({ name, icon }: { name: string; icon?: string }) {
   return (
-    <span
-      className={cn(
-        "inline-flex items-center gap-2 rounded-xl border border-border bg-card/80 px-3.5 py-2",
-        "text-sm text-foreground/90 shadow-[var(--shadow-card)]",
-        "transition-[transform,border-color,background-color,box-shadow] duration-150",
-        "hover:-translate-y-px hover:border-primary/30 hover:bg-muted/40 hover:shadow-[var(--shadow-card-hover)]",
-      )}
-    >
+    <span className="soft-pill-btn">
       {icon ? (
         <TechIcon slug={icon} label={name} />
       ) : (
-        <span className="size-1.5 rounded-full bg-primary/70" aria-hidden />
+        <span
+          className="size-1 shrink-0 rounded-full bg-muted-foreground/50"
+          aria-hidden
+        />
       )}
-      {name}
+      <span>{name}</span>
     </span>
   );
 }
 
 export function TechSection() {
   return (
-    <Section
-      id="tech"
-      title="Tech stack"
-      description="Tools I use to ship production systems."
-    >
+    <Section id="tech" title="tools i reach for">
       <div className="space-y-7">
         {(Object.keys(labels) as Array<keyof typeof labels>).map((key, i) => (
           <Reveal key={key} delay={i * 0.04}>
-            <h3 className="section-label mb-3">{labels[key]}</h3>
+            <h3 className="mb-3 text-[12px] uppercase tracking-[0.08em] text-muted-foreground/80">
+              {labels[key]}
+            </h3>
             <Reveal
               variant="stagger-fast"
               as="ul"
-              className="flex flex-wrap gap-2"
+              className="flex flex-wrap items-center gap-2"
             >
               {techByCategory[key].map((t) => (
-                <RevealItem key={t.name} as="li">
+                <RevealItem key={t.name} as="li" className="list-none">
                   <TechChip name={t.name} icon={t.icon} />
                 </RevealItem>
               ))}

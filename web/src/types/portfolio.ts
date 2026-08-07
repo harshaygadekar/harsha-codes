@@ -40,7 +40,8 @@ export interface ProjectItem {
   id: string;
   title: string;
   summary: string;
-  highlights: string[];
+  /** Optional impact bullets — prefer a strong summary when omitted */
+  highlights?: string[];
   technologies: string[];
   heroMetric?: string;
   github?: string;
@@ -54,14 +55,22 @@ export interface PublicationItem {
   venue: string;
   date: string;
   role: string;
+  /** Short description of what the paper contributes */
   note?: string;
   github?: string;
   paperUrl?: string;
 }
 
+export type TechCategory =
+  | "backend"
+  | "ai"
+  | "frontend"
+  | "infrastructure"
+  | "databases";
+
 export interface TechItem {
   name: string;
-  category: "languages" | "frameworks" | "tools" | "libraries";
+  category: TechCategory;
   /** Simple-icons slug when available */
   icon?: string;
 }
