@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Send } from "lucide-react";
 import { portfolio } from "@/content/portfolio";
 import {
   validateContact,
@@ -57,14 +56,14 @@ export function ContactSection() {
       }
 
       setStatus("ok");
-      setMessage("Thanks — I'll get back to you soon.");
+      setMessage("thanks — i'll get back to you soon.");
       form.reset();
     } catch (err) {
       setStatus("error");
       setMessage(
         err instanceof Error
           ? err.message
-          : `Could not send. Email me at ${portfolio.person.email}`,
+          : `could not send. email me at ${portfolio.person.email}`,
       );
     }
   }
@@ -72,122 +71,132 @@ export function ContactSection() {
   return (
     <Section
       id="contact"
-      title="Contact"
-      description="Open to software engineering roles in Bengaluru or remote India."
-      className="pb-10 md:pb-14"
-      align="center"
+      title="Let's build something useful."
+      description="Interested in backend engineering, AI infrastructure, and early stage startups."
+      className="pb-6 md:pb-8"
     >
       <Reveal>
-        <div className="surface-matte mx-auto max-w-xl rounded-2xl p-6 sm:p-9">
-          <form onSubmit={onSubmit} className="relative space-y-5" noValidate>
-            <div
-              className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden"
-              aria-hidden
+        <form onSubmit={onSubmit} className="relative space-y-5" noValidate>
+          <div
+            className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden"
+            aria-hidden
+          >
+            <label htmlFor="website">Website</label>
+            <input
+              id="website"
+              name="website"
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
+
+          <div className="space-y-1.5">
+            <label
+              htmlFor="name"
+              className="text-[13px] text-muted-foreground"
             >
-              <label htmlFor="website">Website</label>
-              <input
-                id="website"
-                name="website"
-                type="text"
-                tabIndex={-1}
-                autoComplete="off"
-              />
-            </div>
-
-            <div className="space-y-1.5">
-              <label htmlFor="name" className="text-sm font-medium">
-                Name
-              </label>
-              <Input
-                id="name"
-                name="name"
-                required
-                autoComplete="name"
-                placeholder="Your name"
-                disabled={status === "loading"}
-                className="h-10"
-                aria-invalid={fields.name ? true : undefined}
-                aria-describedby={fields.name ? "name-error" : undefined}
-              />
-              {fields.name ? (
-                <p id="name-error" className="text-xs text-destructive">
-                  {fields.name}
-                </p>
-              ) : null}
-            </div>
-
-            <div className="space-y-1.5">
-              <label htmlFor="email" className="text-sm font-medium">
-                Email
-              </label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                required
-                autoComplete="email"
-                placeholder="you@company.com"
-                disabled={status === "loading"}
-                className="h-10"
-                aria-invalid={fields.email ? true : undefined}
-                aria-describedby={fields.email ? "email-error" : undefined}
-              />
-              {fields.email ? (
-                <p id="email-error" className="text-xs text-destructive">
-                  {fields.email}
-                </p>
-              ) : null}
-            </div>
-
-            <div className="space-y-1.5">
-              <label htmlFor="message" className="text-sm font-medium">
-                Message
-              </label>
-              <Textarea
-                id="message"
-                name="message"
-                required
-                rows={5}
-                placeholder="What are you building?"
-                disabled={status === "loading"}
-                className="min-h-32 resize-y"
-                aria-invalid={fields.message ? true : undefined}
-                aria-describedby={fields.message ? "message-error" : undefined}
-              />
-              {fields.message ? (
-                <p id="message-error" className="text-xs text-destructive">
-                  {fields.message}
-                </p>
-              ) : null}
-            </div>
-
-            <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between">
-              <Button type="submit" disabled={status === "loading"} size="lg">
-                <Send data-icon="inline-start" />
-                {status === "loading" ? "Sending…" : "Send message"}
-              </Button>
-              <a
-                href={`mailto:${portfolio.person.email}`}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                or email directly
-              </a>
-            </div>
-
-            {message ? (
-              <p
-                role={status === "error" ? "alert" : "status"}
-                className={
-                  status === "ok"
-                    ? "rounded-md border border-primary/20 bg-primary/5 px-3 py-2 text-sm text-foreground"
-                    : "rounded-md border border-destructive/25 bg-destructive/5 px-3 py-2 text-sm text-destructive"
-                }
-              >
-                {status === "error" ? `Error: ${message}` : message}
+              name
+            </label>
+            <Input
+              id="name"
+              name="name"
+              required
+              autoComplete="name"
+              placeholder="your name"
+              disabled={status === "loading"}
+              className="h-10 rounded-lg border-border/80 bg-transparent"
+              aria-invalid={fields.name ? true : undefined}
+              aria-describedby={fields.name ? "name-error" : undefined}
+            />
+            {fields.name ? (
+              <p id="name-error" className="text-xs text-destructive">
+                {fields.name}
               </p>
             ) : null}
-          </form>
-        </div>
+          </div>
+
+          <div className="space-y-1.5">
+            <label
+              htmlFor="email"
+              className="text-[13px] text-muted-foreground"
+            >
+              email
+            </label>
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              required
+              autoComplete="email"
+              placeholder="you@company.com"
+              disabled={status === "loading"}
+              className="h-10 rounded-lg border-border/80 bg-transparent"
+              aria-invalid={fields.email ? true : undefined}
+              aria-describedby={fields.email ? "email-error" : undefined}
+            />
+            {fields.email ? (
+              <p id="email-error" className="text-xs text-destructive">
+                {fields.email}
+              </p>
+            ) : null}
+          </div>
+
+          <div className="space-y-1.5">
+            <label
+              htmlFor="message"
+              className="text-[13px] text-muted-foreground"
+            >
+              message
+            </label>
+            <Textarea
+              id="message"
+              name="message"
+              required
+              rows={5}
+              placeholder="what are you building?"
+              disabled={status === "loading"}
+              className="min-h-32 resize-y rounded-lg border-border/80 bg-transparent"
+              aria-invalid={fields.message ? true : undefined}
+              aria-describedby={fields.message ? "message-error" : undefined}
+            />
+            {fields.message ? (
+              <p id="message-error" className="text-xs text-destructive">
+                {fields.message}
+              </p>
+            ) : null}
+          </div>
+
+          <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between">
+            <Button
+              type="submit"
+              disabled={status === "loading"}
+              size="lg"
+              className="h-10 rounded-lg px-5"
+            >
+              {status === "loading" ? "sending…" : "send message"}
+            </Button>
+            <a
+              href={`mailto:${portfolio.person.email}`}
+              className="text-sm link-quiet"
+            >
+              or email directly
+            </a>
+          </div>
+
+          {message ? (
+            <p
+              role={status === "error" ? "alert" : "status"}
+              className={
+                status === "ok"
+                  ? "rounded-lg border border-border bg-muted/40 px-3 py-2 text-sm text-foreground"
+                  : "rounded-lg border border-destructive/25 bg-destructive/5 px-3 py-2 text-sm text-destructive"
+              }
+            >
+              {status === "error" ? `error: ${message}` : message}
+            </p>
+          ) : null}
+        </form>
       </Reveal>
     </Section>
   );

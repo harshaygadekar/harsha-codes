@@ -58,13 +58,32 @@ CONTACT_TO=harshaygadekar05@gmail.com
 GITHUB_TOKEN=
 UPSTASH_REDIS_REST_URL=
 UPSTASH_REDIS_REST_TOKEN=
+BLOG_ADMIN_PASSWORD=
+BLOG_SESSION_SECRET=
 ```
 
 | Var | Effect if missing |
 |-----|-------------------|
 | `RESEND_API_KEY` | Form validates; logs message only |
 | `GITHUB_TOKEN` | Public GitHub API (lower rate limit) |
-| `UPSTASH_*` | Visitor count in-memory (resets on cold start) |
+| `UPSTASH_*` | Visitor count in-memory (resets on cold start); blog posts still use local `content/blog/` |
+| `BLOG_ADMIN_PASSWORD` + `BLOG_SESSION_SECRET` | Writing admin login disabled |
+
+### Writing / blog
+
+- Public: `/writing` and `/writing/[slug]` · RSS at `/writing/rss.xml`
+- Studio (password-gated): `/writing/hrsh`
+- Editor: TipTap with uploads, YouTube, autosave drafts, tags
+- Storage: Upstash Redis (prod) + `content/blog/*.json` when writable
+- Media: Vercel Blob (`BLOB_READ_WRITE_TOKEN`) in prod; `public/uploads/` in dev
+- Backup: Studio → **Export backup** (JSON download)
+- Analytics: Vercel Web Analytics (enable in Vercel project settings)
+
+### Security notes
+
+- Login rate-limited (5 / 15 min per IP)
+- Security headers + CSP on all routes
+- Studio and `/api/blog` disallowed in robots
 
 ## Quality checks
 

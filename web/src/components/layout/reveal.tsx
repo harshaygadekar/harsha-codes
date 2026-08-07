@@ -4,19 +4,32 @@ import { motion, useReducedMotion } from "framer-motion";
 import {
   fadeUp,
   fadeIn,
+  fadeScale,
+  slideIn,
   stagger,
   staggerFast,
+  staggerHero,
   motionProps,
 } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
-type RevealVariant = "up" | "fade" | "stagger" | "stagger-fast";
+type RevealVariant =
+  | "up"
+  | "fade"
+  | "scale"
+  | "slide"
+  | "stagger"
+  | "stagger-fast"
+  | "stagger-hero";
 
 const variantsMap = {
   up: fadeUp,
   fade: fadeIn,
+  scale: fadeScale,
+  slide: slideIn,
   stagger,
   "stagger-fast": staggerFast,
+  "stagger-hero": staggerHero,
 } as const;
 
 interface RevealProps {
@@ -29,7 +42,7 @@ interface RevealProps {
 }
 
 /**
- * Minimal scroll/entrance reveal. Respects prefers-reduced-motion.
+ * Soft scroll/entrance reveal with blur. Respects prefers-reduced-motion.
  */
 export function Reveal({
   children,
@@ -45,7 +58,10 @@ export function Reveal({
     return <Tag className={className}>{children}</Tag>;
   }
 
-  const isStagger = variant === "stagger" || variant === "stagger-fast";
+  const isStagger =
+    variant === "stagger" ||
+    variant === "stagger-fast" ||
+    variant === "stagger-hero";
   const Comp =
     as === "ul"
       ? motion.ul
@@ -68,7 +84,7 @@ export function Reveal({
         ? {}
         : {
             transition: {
-              duration: 0.35,
+              duration: 0.65,
               ease: [0.22, 1, 0.36, 1] as const,
               delay,
             },

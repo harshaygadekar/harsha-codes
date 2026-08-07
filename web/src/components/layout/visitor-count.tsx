@@ -33,18 +33,18 @@ export function VisitorCount() {
       : count.toLocaleString("en-US", { maximumFractionDigits: 0 });
 
   return (
-    <div
-      className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-background/70 px-3 py-1.5 text-xs text-muted-foreground shadow-sm backdrop-blur-sm"
+    <p
+      className="inline-flex items-center gap-1.5 text-[13px] text-muted-foreground"
       aria-live="polite"
       title="Approximate unique visitors"
     >
-      <Eye className="size-3.5 text-primary/80" aria-hidden />
+      <Eye className="size-3.5 shrink-0 opacity-70" aria-hidden />
       <span>
-        Visitor{" "}
-        <span className="font-mono font-semibold tabular-nums text-foreground">
+        visitor{" "}
+        <span className="font-mono tabular-nums text-foreground/80">
           #{display}
         </span>
       </span>
-    </div>
+    </p>
   );
 }
