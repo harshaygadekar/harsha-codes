@@ -4,15 +4,11 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { JSONContent } from "@tiptap/react";
 import { BlogEditor } from "@/components/blog/blog-editor";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import type { BlogPost, BlogStatus } from "@/lib/blog/types";
 import { slugify } from "@/lib/blog/slug";
 import { emptyDoc } from "@/lib/blog/html";
 import { blogStudio } from "@/lib/blog/paths";
 import { readApiJson } from "@/lib/blog/api-client";
-import { cn } from "@/lib/utils";
 
 interface PostFormProps {
   mode: "create" | "edit";
@@ -222,44 +218,42 @@ export function PostForm({ mode, initial }: PostFormProps) {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="text-[12px] text-muted-foreground" aria-live="polite">
-          {status === "draft" ? (
-            autoState === "saving" ? (
-              "Autosaving…"
-            ) : autoState === "saved" && autoAt ? (
-              <>Saved · {autoAt}</>
-            ) : autoState === "error" ? (
-              "Autosave failed — use Save draft"
-            ) : (
-              "Drafts autosave while you write"
-            )
+    <div className="space-y-7">
+      <p className="text-[13px] text-muted-foreground" aria-live="polite">
+        {status === "draft" ? (
+          autoState === "saving" ? (
+            "saving…"
+          ) : autoState === "saved" && autoAt ? (
+            <>saved · {autoAt}</>
+          ) : autoState === "error" ? (
+            "autosave failed — hit save draft"
           ) : (
-            "Published — use Update to save changes"
-          )}
-        </p>
-      </div>
+            "drafts autosave while you write"
+          )
+        ) : (
+          "published — update to save changes"
+        )}
+      </p>
 
-      <div className="space-y-1.5">
-        <label htmlFor="post-title" className="text-[13px] text-muted-foreground">
+      <div>
+        <label htmlFor="post-title" className="block text-[13px] text-muted-foreground mb-1">
           title
         </label>
-        <Input
+        <input
           id="post-title"
           value={title}
           onChange={(e) => onTitleChange(e.target.value)}
-          placeholder="A clear, human title"
-          className="h-12 border-border/70 bg-card/40 text-xl font-medium tracking-tight sm:text-2xl"
+          placeholder="a clear title"
+          className="field-ink text-[1.15rem] sm:text-xl font-medium tracking-tight"
         />
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div className="space-y-1.5">
-          <label htmlFor="post-slug" className="text-[13px] text-muted-foreground">
+      <div className="grid gap-6 sm:grid-cols-2">
+        <div>
+          <label htmlFor="post-slug" className="block text-[13px] text-muted-foreground mb-1">
             slug
           </label>
-          <Input
+          <input
             id="post-slug"
             value={slug}
             onChange={(e) => {
@@ -268,54 +262,20 @@ export function PostForm({ mode, initial }: PostFormProps) {
               setSlug(slugify(e.target.value));
             }}
             placeholder="url-friendly-slug"
-            className="border-border/70 bg-card/40 font-mono text-[13px]"
+            className="field-ink font-mono text-[13px]"
           />
         </div>
-        <div className="space-y-1.5">
-          <span className="text-[13px] text-muted-foreground">status</span>
-          <div className="flex h-9 items-center gap-2 text-[13px]">
-            <span
-              className={cn(
-                "rounded-full px-2.5 py-0.5",
-                status === "published"
-                  ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
-                  : "bg-muted text-muted-foreground",
-              )}
-            >
-              {status}
-            </span>
-          </div>
+        <div>
+          <p className="text-[13px] text-muted-foreground mb-1">status</p>
+          <p className="pt-2 text-[14px] text-foreground/80">{status}</p>
         </div>
       </div>
 
-      <div className="space-y-1.5">
-        <label htmlFor="post-tags" className="text-[13px] text-muted-foreground">
-          tags{" "}
-          <span className="text-muted-foreground/60">
-            (comma-separated, e.g. backend, ai)
-          </span>
+      <div>
+        <label htmlFor="post-excerpt" className="block text-[13px] text-muted-foreground mb-1">
+          excerpt <span className="text-muted-foreground/60">(optional)</span>
         </label>
-        <Input
-          id="post-tags"
-          value={tagsInput}
-          onChange={(e) => {
-            dirty.current = true;
-            setTagsInput(e.target.value);
-          }}
-          placeholder="backend, ai, systems"
-          className="border-border/70 bg-card/40 text-[14px]"
-        />
-      </div>
-
-      <div className="space-y-1.5">
-        <label
-          htmlFor="post-excerpt"
-          className="text-[13px] text-muted-foreground"
-        >
-          excerpt{" "}
-          <span className="text-muted-foreground/60">(optional — auto if empty)</span>
-        </label>
-        <Textarea
+        <textarea
           id="post-excerpt"
           value={excerpt}
           onChange={(e) => {
@@ -323,67 +283,66 @@ export function PostForm({ mode, initial }: PostFormProps) {
             setExcerpt(e.target.value);
           }}
           rows={2}
-          placeholder="One or two lines that appear on the writing index."
-          className="resize-y border-border/70 bg-card/40 text-[14px]"
+          placeholder="one or two lines for the writings list"
+          className="field-ink resize-y min-h-[3.5rem]"
         />
       </div>
 
-      <div className="space-y-1.5">
-        <p className="text-[13px] text-muted-foreground">body</p>
+      <div>
+        <p className="text-[13px] text-muted-foreground mb-2">body</p>
         <BlogEditor
           initialContent={initial?.contentJson}
           onChange={onEditorChange}
         />
       </div>
 
-      {(error || message) && (
+      {error || message ? (
         <p
-          className={cn(
-            "text-[13px]",
-            error ? "text-destructive" : "text-muted-foreground",
-          )}
+          className={
+            error ? "text-[13px] text-destructive" : "text-[13px] text-muted-foreground"
+          }
           role="status"
         >
           {error || message}
         </p>
-      )}
+      ) : null}
 
-      <div className="flex flex-wrap items-center gap-2 border-t border-border/60 pt-5">
-        <Button
+      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2 pt-1">
+        <button
           type="button"
+          className="blue-link"
           disabled={saving || !title.trim()}
           onClick={() => save("draft")}
-          variant="outline"
         >
-          {saving ? "Saving…" : "Save draft"}
-        </Button>
-        <Button
+          {saving ? "saving…" : "save draft"}
+        </button>
+        <button
           type="button"
+          className="blue-link"
           disabled={saving || !title.trim()}
           onClick={() => save("published")}
         >
-          {status === "published" ? "Update & publish" : "Publish"}
-        </Button>
+          {status === "published" ? "update" : "publish"}
+        </button>
         {mode === "edit" && status === "published" ? (
-          <Button
+          <button
             type="button"
-            variant="ghost"
+            className="blue-link"
             disabled={saving}
             onClick={() => save("draft")}
           >
-            Unpublish
-          </Button>
+            unpublish
+          </button>
         ) : null}
         {mode === "edit" ? (
-          <Button
+          <button
             type="button"
-            variant="destructive"
+            className="blue-link"
             disabled={saving}
             onClick={remove}
-            className="sm:ml-auto"
           >
-            Delete
-          </Button>
+            delete
+          </button>
         ) : null}
       </div>
     </div>

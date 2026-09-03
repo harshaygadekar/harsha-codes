@@ -7,9 +7,7 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default function OpenGraphImage() {
-  const name = portfolio.person.fullName;
-  const role = portfolio.person.role;
-  const brand = portfolio.brand;
+  const name = portfolio.person.firstName.toLowerCase();
 
   return new ImageResponse(
     (
@@ -20,46 +18,47 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0c0c0e",
-          color: "#f4f4f5",
+          background: "#14110e",
+          color: "#f3eee4",
           padding: "72px 80px",
-          fontFamily:
-            "ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif",
+          fontFamily: "Georgia, ui-serif, serif",
         }}
       >
         <div
           style={{
             display: "flex",
-            alignItems: "center",
-            fontSize: 28,
-            letterSpacing: "-0.02em",
-            color: "#a1a1aa",
+            fontSize: 22,
+            letterSpacing: "0.08em",
+            color: "#a3988a",
+            fontFamily: "ui-monospace, monospace",
           }}
         >
-          {brand}
+          harsha.codes
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <div
             style={{
-              fontSize: 72,
-              fontWeight: 600,
-              letterSpacing: "-0.03em",
-              lineHeight: 1.05,
-              color: "#fafafa",
+              fontSize: 88,
+              fontStyle: "italic",
+              fontWeight: 400,
+              letterSpacing: "-0.04em",
+              lineHeight: 1,
+              color: "#f3eee4",
             }}
           >
             {name}
           </div>
           <div
             style={{
-              fontSize: 32,
-              lineHeight: 1.35,
-              color: "#a1a1aa",
-              maxWidth: 900,
+              fontSize: 28,
+              lineHeight: 1.4,
+              color: "#a3988a",
+              maxWidth: 820,
+              fontFamily: "ui-sans-serif, system-ui, sans-serif",
             }}
           >
-            {role}
+            {portfolio.person.about}
           </div>
         </div>
 
@@ -67,13 +66,13 @@ export default function OpenGraphImage() {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "flex-end",
-            fontSize: 24,
-            color: "#71717a",
+            fontSize: 22,
+            color: "#6f675c",
+            fontFamily: "ui-monospace, monospace",
           }}
         >
-          <span>{portfolio.person.location}</span>
-          <span style={{ color: "#52525b" }}>Backend · AI · Systems</span>
+          <span>{portfolio.person.location.toLowerCase()}</span>
+          <span>work · projects · writing</span>
         </div>
       </div>
     ),

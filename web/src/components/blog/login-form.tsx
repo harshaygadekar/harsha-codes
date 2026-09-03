@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 export function LoginForm({ configured }: { configured: boolean }) {
   const router = useRouter();
@@ -35,18 +33,9 @@ export function LoginForm({ configured }: { configured: boolean }) {
 
   if (!configured) {
     return (
-      <div className="max-w-md rounded-xl border border-border/70 bg-card/40 p-5">
-        <p className="text-[15px] font-medium tracking-tight">
-          Admin not configured
-        </p>
-        <p className="mt-2 text-[14px] leading-relaxed text-muted-foreground">
-          Add these to{" "}
-          <code className="rounded bg-muted px-1 py-0.5 text-[12px]">
-            web/.env.local
-          </code>{" "}
-          and restart the dev server:
-        </p>
-        <pre className="mt-3 overflow-x-auto rounded-lg bg-muted/70 p-3 text-[12px] leading-relaxed text-foreground/85">
+      <div className="max-w-md space-y-3 text-[14px] sm:text-[14.5px] leading-relaxed text-foreground/90">
+        <p>admin is not set up yet. add these to web/.env.local and restart:</p>
+        <pre className="overflow-x-auto text-[13px] text-muted-foreground">
 {`BLOG_ADMIN_PASSWORD=your-strong-password
 BLOG_SESSION_SECRET=at-least-16-chars-secret`}
         </pre>
@@ -55,21 +44,21 @@ BLOG_SESSION_SECRET=at-least-16-chars-secret`}
   }
 
   return (
-    <form onSubmit={onSubmit} className="max-w-sm space-y-4">
-      <div className="space-y-1.5">
+    <form onSubmit={onSubmit} className="max-w-sm space-y-5">
+      <div>
         <label
           htmlFor="blog-password"
-          className="text-[13px] text-muted-foreground"
+          className="block text-[13px] text-muted-foreground mb-1"
         >
           password
         </label>
-        <Input
+        <input
           id="blog-password"
           type="password"
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="border-border/70 bg-card/40"
+          className="field-ink"
           required
           minLength={8}
         />
@@ -79,9 +68,13 @@ BLOG_SESSION_SECRET=at-least-16-chars-secret`}
           {error}
         </p>
       ) : null}
-      <Button type="submit" disabled={loading || password.length < 8}>
-        {loading ? "Checking…" : "Enter"}
-      </Button>
+      <button
+        type="submit"
+        className="blue-link"
+        disabled={loading || password.length < 8}
+      >
+        {loading ? "checking…" : "enter"}
+      </button>
     </form>
   );
 }

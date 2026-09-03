@@ -35,7 +35,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: post.publishedAt ?? undefined,
       modifiedTime: post.updatedAt,
       authors: [portfolio.person.fullName],
-      tags: post.tags,
     },
     twitter: {
       card: "summary_large_image",
@@ -86,59 +85,41 @@ export default async function WritingPostPage({ params }: Props) {
       url: siteUrl,
     },
     mainEntityOfPage: `${siteUrl}/writing/${post.slug}`,
-    keywords: (post.tags ?? []).join(", "),
   };
 
   return (
-    <article className="reading-column py-14 md:py-20">
+    <article className="site-frame page-enter pt-28 pb-16 sm:pt-32 sm:pb-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       <nav className="mb-10" aria-label="Post">
-        <Link
-          href="/writing"
-          className="text-[13px] text-muted-foreground transition-colors hover:text-foreground"
-        >
+        <Link href="/writing" className="chrome-link">
           ← writing
         </Link>
       </nav>
 
       {post.status === "draft" ? (
-        <p className="mb-4 inline-flex rounded-full bg-amber-500/10 px-2.5 py-0.5 text-[12px] text-amber-800 dark:text-amber-300">
+        <p className="mb-4 font-mono text-[0.72rem] tracking-[0.04em] text-muted-foreground">
           draft preview — only you can see this
         </p>
       ) : null}
 
       <header className="mb-12">
-        {(post.tags ?? []).length > 0 ? (
-          <div className="mb-4 flex flex-wrap gap-1.5">
-            {post.tags.map((t) => (
-              <Link
-                key={t}
-                href={`/writing?tag=${encodeURIComponent(t)}`}
-                className="tech-chip hover:border-foreground/20"
-              >
-                {t}
-              </Link>
-            ))}
-          </div>
-        ) : null}
-
-        <h1 className="text-[2rem] font-medium leading-[1.2] tracking-tight text-foreground sm:text-[2.5rem]">
+        <h1 className="font-display text-[2rem] font-normal leading-[1.15] tracking-[-0.03em] text-foreground sm:text-[2.45rem]">
           {post.title}
         </h1>
 
         {post.excerpt ? (
-          <p className="mt-5 max-w-2xl text-[1.125rem] leading-relaxed text-muted-foreground">
+          <p className="mt-5 max-w-xl text-[1.05rem] leading-relaxed text-muted-foreground">
             {post.excerpt}
           </p>
         ) : null}
 
-        <p className="mt-6 text-[13px] text-muted-foreground">
-          <span>{portfolio.person.fullName}</span>
-          <span className="mx-1.5 text-muted-foreground/40" aria-hidden>
+        <p className="mt-6 font-mono text-[0.72rem] tracking-[0.04em] text-muted-foreground">
+          <span>{portfolio.person.fullName.toLowerCase()}</span>
+          <span className="mx-1.5 text-muted-foreground/50" aria-hidden>
             ·
           </span>
           <time dateTime={post.publishedAt ?? post.createdAt}>
@@ -146,11 +127,11 @@ export default async function WritingPostPage({ params }: Props) {
           </time>
           {showUpdated(post.publishedAt, post.updatedAt) ? (
             <>
-              <span className="mx-1.5 text-muted-foreground/40" aria-hidden>
+              <span className="mx-1.5 text-muted-foreground/50" aria-hidden>
                 ·
               </span>
               <span>
-                Updated{" "}
+                updated{" "}
                 <time dateTime={post.updatedAt}>
                   {formatDate(post.updatedAt)}
                 </time>

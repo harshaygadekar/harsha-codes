@@ -24,6 +24,7 @@ export interface ExperienceItem {
   end: string;
   highlights: string[];
   technologies: string[];
+  href?: string;
 }
 
 export interface EducationItem {
@@ -36,6 +37,8 @@ export interface EducationItem {
   cgpa?: string;
 }
 
+export type ProjectGroup = "shipped" | "lab";
+
 export interface ProjectItem {
   id: string;
   title: string;
@@ -43,6 +46,11 @@ export interface ProjectItem {
   /** Optional impact bullets — prefer a strong summary when omitted */
   highlights?: string[];
   technologies: string[];
+  /** Short bracket tags on list pages, e.g. python · security */
+  tags?: string[];
+  /** Calendar year the project shipped or was last active */
+  year?: string;
+  group?: ProjectGroup;
   heroMetric?: string;
   github?: string;
   demo?: string;
@@ -86,12 +94,19 @@ export interface PortfolioContent {
     email: string;
     phone: string;
     summary: string;
+    /** Homepage bio lines */
+    intro: string[];
+    /** One-line current status for the homepage index */
+    now: string;
+    /** Homepage bio — shorter than summary */
+    about: string;
     signature: string;
   };
   links: {
     resume: string;
     github: string;
     linkedin: string;
+    x?: string;
     website?: string;
   };
   social: SocialLink[];

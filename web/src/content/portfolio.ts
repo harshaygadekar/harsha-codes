@@ -9,15 +9,21 @@ export const portfolio: PortfolioContent = {
   person: {
     fullName: "Harsha Gadekar",
     firstName: "Harsha",
-    role: "Backend engineer building AI systems. Independent researcher.",
+    role: "Backend engineer. I build AI systems.",
     location: "Bengaluru, India",
     timezone: "Asia/Kolkata",
     email: "harshaygadekar05@gmail.com",
     phone: "+918660455779",
     summary:
-      "I like building software solutions that are simple and reliable. My interests sit at the intersection of backend engineering, AI systems, and open source. Right now I'm exploring distributed systems and ML infrastructure while shipping projects that solve real problems.",
-    signature:
-      "Building today. Learning every day. Hoping to create and contribute to solutions that outlive me.",
+      "I'm a software engineer interested in backend systems and AI.",
+    intro: [
+      "I'm a software engineer interested in backend systems and AI. Recently finished my term at Nokia. These days, I'm building projects, exploring open source, and learning more about systems and AI.",
+      "Based in Bengaluru. Open to work and collabs.",
+    ],
+    now: "open to work · Bengaluru",
+    about:
+      "I'm a software engineer interested in backend systems and AI.",
+    signature: "Building today. Learning as I go.",
   },
   links: {
     // Google Drive "anyone with the link" view URL (opens in a new tab).
@@ -26,6 +32,7 @@ export const portfolio: PortfolioContent = {
     resume: "/resume.pdf",
     github: "https://github.com/harshaygadekar",
     linkedin: "https://linkedin.com/in/harsha-y-b61b56229",
+    x: "https://x.com/HarshaGadekar",
   },
   social: [
     {
@@ -54,9 +61,9 @@ export const portfolio: PortfolioContent = {
     },
     {
       id: "twitter",
-      label: "X / Twitter",
-      href: "#",
-      enabled: false,
+      label: "X",
+      href: "https://x.com/HarshaGadekar",
+      enabled: true,
     },
     {
       id: "threads",
@@ -79,21 +86,11 @@ export const portfolio: PortfolioContent = {
       location: "Bengaluru",
       start: "Aug 2025",
       end: "May 2026",
+      href: "https://www.nokia.com",
       highlights: [
-        "Built a service that turns raw network counters into clear health trends across 540+ KPI types.",
-        "Took trend accuracy to about 95% with validation, quality checks, and safe release gates before anything hit production.",
-        "Built a real-time correlation tool that cut root-cause investigation from hours down to minutes.",
-        "Delivered a production feature used on live optical-network data, end to end.",
+        "Built systems and statistical models that turn large volumes of network data into clear health and trend signals, making it easier for thousands of end users/customers to identify problems without manually digging through metrics. Also contributed to internal tools for network monitoring and diagnostics.",
       ],
-      technologies: [
-        "Java",
-        "Spring Boot",
-        "Python",
-        "FastAPI",
-        "Apache Pinot",
-        "React",
-        "TypeScript",
-      ],
+      technologies: ["Java", "Spring Boot", "Python", "FastAPI", "Apache Pinot"],
     },
   ],
   education: [
@@ -104,6 +101,7 @@ export const portfolio: PortfolioContent = {
       location: "Bengaluru",
       start: "Dec 2024",
       end: "July 2026",
+      cgpa: "8.63",
     },
     {
       id: "pes-bca",
@@ -112,46 +110,46 @@ export const portfolio: PortfolioContent = {
       location: "Shimoga",
       start: "Oct 2021",
       end: "Sept 2024",
+      cgpa: "9.2",
     },
   ],
   projects: [
     {
-      id: "ai-news-aggregator",
-      title: "AI News Aggregator",
-      summary:
-        "A Discord bot that watches 85+ AI sources and posts clean, organized alerts — more release desk than noisy firehose.",
-      highlights: [
-        "Adaptive polling speeds up on hot sources and backs off when quiet, so coverage stays high without spam.",
-        "Cross-checks signals across sources and scores reliability so weak rumors don't drown out real releases.",
-        "Ships production-ready with Docker, health checks, and about 97% uptime on AWS.",
-      ],
-      technologies: ["Node.js", "SQLite", "Discord.js", "Docker", "AWS", "Groq"],
-      heroMetric: "85+ sources · 97% uptime",
-      github: "https://github.com/harshaygadekar/AI-news-aggregator",
-    },
-    {
       id: "raguard",
       title: "RAGuard Security",
       summary:
-        "A security layer for RAG apps that catches when an AI tries to leak private retrieved context.",
+        "Stops RAG apps from leaking private context. Drop it into LangChain or FastAPI. It's on PyPI.",
       highlights: [
-        "Uses session-specific canary tokens — 100% detection when leaked context shows up in the answer.",
-        "Drops into LangChain, LlamaIndex, or FastAPI with under 5ms of extra latency per request.",
-        "Open source on PyPI (MIT) so teams can add protection without rewriting their stack.",
+        "Catches leaked context with session canary tokens.",
+        "Drop-in for LangChain, LlamaIndex, or FastAPI.",
       ],
       technologies: ["Python", "FastAPI", "LangChain", "LlamaIndex", "Redis"],
-      heroMetric: "<5ms overhead · 100% token detection",
+      year: "2026",
+      group: "shipped",
       github: "https://github.com/harshaygadekar/raguard-security",
+    },
+    {
+      id: "ai-news-aggregator",
+      title: "AI News Aggregator",
+      summary:
+        "A Discord bot that watches AI sources and pings you when something real drops, not every rumor.",
+      highlights: [
+        "Speeds up when a source is hot, backs off when it's quiet.",
+        "Tries not to spam you with the same news twice.",
+      ],
+      technologies: ["Node.js", "SQLite", "Discord.js", "Docker", "AWS", "Groq"],
+      year: "2026",
+      group: "shipped",
+      github: "https://github.com/harshaygadekar/AI-news-aggregator",
     },
     {
       id: "verifyai",
       title: "VerifyAI",
       summary:
-        "An AI search app that gathers web evidence first, then answers with inline citations you can check.",
+        "Looks the web up first, then answers with citations you can actually click.",
       highlights: [
-        "Fetch-first design keeps answers grounded in real sources, not model memory alone.",
-        "Supports quick search and deeper multi-query research with a clean, minimal UI.",
-        "Streams fast answers with Groq and keeps a full reference trail for every claim.",
+        "Fetches sources before it talks.",
+        "Keeps a trail of links for every claim.",
       ],
       technologies: [
         "Next.js",
@@ -161,19 +159,42 @@ export const portfolio: PortfolioContent = {
         "Firecrawl",
         "Supabase",
       ],
+      year: "2026",
+      group: "shipped",
       github: "https://github.com/harshaygadekar/VerifyAI",
+    },
+    {
+      id: "prep-ai",
+      title: "Prep AI",
+      summary:
+        "Mock interviews over voice, questions off your resume, scores you pretty much instantly.",
+      highlights: [
+        "Live voice interviews and a simple score dashboard.",
+      ],
+      technologies: ["Next.js", "TypeScript", "Supabase", "Prisma", "Groq"],
+      year: "2025",
+      group: "lab",
+      github: "https://github.com/harshaygadekar/prep.ai",
+    },
+    {
+      id: "chat-docs",
+      title: "Chat with your documents",
+      summary: "Upload a PDF, ask it questions. That's pretty much the whole thing.",
+      technologies: ["Python", "LLaMA-3", "Streamlit", "FastEmbed"],
+      year: "2024",
+      group: "lab",
+      github:
+        "https://github.com/harshaygadekar/chat-with-your-documents-2",
     },
   ],
   publications: [
     {
       id: "icauc-2026",
-      title:
-        "Role-Aware Context Compression in Agentic AI Pipelines for Question Answering",
+      title: "Role-Aware Context Compression in Agentic AI Pipelines",
       venue: "IEEE ICAUC 2026",
       date: "Jan 2026",
       role: "Co-Author",
-      note:
-        "Role-aware compression for multi-agent QA (Retriever → Reasoner → Verifier): each handoff keeps only what the next agent needs. ~50% fewer inter-agent tokens and ~37% better precision across seven datasets.",
+      note: "Agents pass a lot of junk to each other. We made them pass less, and the answers got better.",
       github: "https://github.com/harshaygadekar/role-based-context-compression",
     },
   ],
@@ -210,15 +231,14 @@ export const portfolio: PortfolioContent = {
   githubUsername: "harshaygadekar",
   visitorSeed: 1000,
   seo: {
-    title: "Harsha Gadekar — Backend Engineer building AI systems",
+    title: "Harsha Gadekar",
     description:
-      "Portfolio of Harsha Gadekar — backend engineer building AI systems. Independent researcher. Nokia SDE intern · Bengaluru.",
+      "Harsha Gadekar — backend engineer in Bengaluru. Builds AI systems.",
     keywords: [
       "Harsha Gadekar",
       "Harsha Y",
       "Backend Engineer",
       "AI systems",
-      "Independent researcher",
       "Bengaluru",
       "Nokia",
       "FastAPI",
@@ -228,6 +248,12 @@ export const portfolio: PortfolioContent = {
 };
 
 export const enabledSocial = portfolio.social.filter((s) => s.enabled);
+
+export const shippedProjects = portfolio.projects.filter(
+  (p) => (p.group ?? "shipped") === "shipped",
+);
+
+export const labProjects = portfolio.projects.filter((p) => p.group === "lab");
 
 export const techByCategory = {
   backend: portfolio.tech.filter((t) => t.category === "backend"),

@@ -168,7 +168,7 @@ export function ProjectsSection() {
           <ul className="divide-y divide-border/70">
             {portfolio.publications.map((pub) => (
               <li key={pub.id}>
-                <div className="flex flex-col gap-2 py-4 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
+                <div className="flex flex-col gap-3 py-4 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
                   <div className="min-w-0 flex-1">
                     <p className="text-[12px] text-muted-foreground">
                       {pub.role} · {pub.venue}
@@ -181,28 +181,33 @@ export function ProjectsSection() {
                         {pub.note}
                       </p>
                     ) : null}
-                    <p className="mt-1.5 text-[13px] tabular-nums text-muted-foreground">
-                      {pub.date}
-                    </p>
                   </div>
-                  <div className="flex shrink-0 gap-4 text-[13px]">
-                    {pub.github ? (
-                      <ExternalLink
-                        href={pub.github}
-                        className="link-quiet"
-                        showMark={false}
-                      >
-                        code ↗
-                      </ExternalLink>
-                    ) : null}
-                    {pub.paperUrl ? (
-                      <ExternalLink
-                        href={pub.paperUrl}
-                        className="link-quiet"
-                        showMark={false}
-                      >
-                        paper ↗
-                      </ExternalLink>
+                  {/* Links + date: date sits under the code link for clear hierarchy */}
+                  <div className="flex shrink-0 flex-col items-start gap-1.5 sm:items-end sm:pt-0.5">
+                    <div className="flex items-center gap-4 text-[13px]">
+                      {pub.github ? (
+                        <ExternalLink
+                          href={pub.github}
+                          className="link-quiet"
+                          showMark={false}
+                        >
+                          code ↗
+                        </ExternalLink>
+                      ) : null}
+                      {pub.paperUrl ? (
+                        <ExternalLink
+                          href={pub.paperUrl}
+                          className="link-quiet"
+                          showMark={false}
+                        >
+                          paper ↗
+                        </ExternalLink>
+                      ) : null}
+                    </div>
+                    {pub.date ? (
+                      <p className="text-[12px] tabular-nums tracking-wide text-muted-foreground/75">
+                        {pub.date}
+                      </p>
                     ) : null}
                   </div>
                 </div>

@@ -252,21 +252,18 @@ export function BlogEditor({
     return (
       <div
         className={cn(
-          "rounded-xl border border-border/70 bg-card/40 px-3 py-10 text-center text-[13px] text-muted-foreground",
+          "py-8 text-[13px] text-muted-foreground",
           className,
         )}
       >
-        Loading editor…
+        loading editor…
       </div>
     );
   }
 
   return (
     <div
-      className={cn(
-        "overflow-hidden rounded-xl border border-border/70 bg-card/30",
-        className,
-      )}
+      className={cn("overflow-hidden", className)}
     >
       <input
         ref={imageInputRef}
@@ -292,7 +289,7 @@ export function BlogEditor({
       />
 
       <div
-        className="flex flex-wrap items-center gap-0.5 border-b border-border/60 bg-muted/30 px-1.5 py-1.5"
+        className="flex flex-wrap items-center gap-0.5 border-b border-border px-0 py-1.5"
         role="toolbar"
         aria-label="Formatting"
       >
