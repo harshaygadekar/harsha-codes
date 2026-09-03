@@ -25,10 +25,7 @@ export default async function EditPostPage({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <AdminShell
-      title="Edit post"
-      description={`Editing /${post.slug}`}
-    >
+    <AdminShell title="edit post" description={`/${post.slug}`}>
       <PostForm mode="edit" initial={post} />
     </AdminShell>
   );

@@ -34,3 +34,10 @@ export function contributionChartUrl(
   const safeColor = encodeURIComponent(color);
   return `https://ghchart.rshah.org/${safeColor}/${safeUser}`;
 }
+
+/** This site's repo — hide its PRs from the homepage list. */
+const HIDDEN_PR_REPOS = new Set(["harshaygadekar/harsha-codes"]);
+
+export function isHiddenPortfolioPr(repo: string): boolean {
+  return HIDDEN_PR_REPOS.has(repo.trim().toLowerCase());
+}

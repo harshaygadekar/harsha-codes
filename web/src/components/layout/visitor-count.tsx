@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Eye } from "lucide-react";
 import { portfolio } from "@/content/portfolio";
 
 export function VisitorCount() {
@@ -34,17 +33,11 @@ export function VisitorCount() {
 
   return (
     <p
-      className="inline-flex items-center gap-1.5 text-[13px] text-muted-foreground"
+      className="font-mono tabular-nums"
       aria-live="polite"
       title="Approximate unique visitors"
     >
-      <Eye className="size-3.5 shrink-0 opacity-70" aria-hidden />
-      <span>
-        visitor{" "}
-        <span className="font-mono tabular-nums text-foreground/80">
-          #{display}
-        </span>
-      </span>
+      visitor #{display}
     </p>
   );
 }

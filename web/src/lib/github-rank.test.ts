@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { contributionChartUrl, rankRepos } from "./github-rank";
+import { contributionChartUrl, isHiddenPortfolioPr, rankRepos } from "./github-rank";
 
 const repo = (
   partial: Partial<{
@@ -63,6 +63,14 @@ describe("rankRepos", () => {
       2,
     );
     expect(ranked).toHaveLength(2);
+  });
+});
+
+describe("isHiddenPortfolioPr", () => {
+  it("hides this site's GitHub repo", () => {
+    expect(isHiddenPortfolioPr("harshaygadekar/harsha-codes")).toBe(true);
+    expect(isHiddenPortfolioPr("HarshayGadekar/harsha-codes")).toBe(true);
+    expect(isHiddenPortfolioPr("unslothai/unsloth")).toBe(false);
   });
 });
 

@@ -4,7 +4,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 import { navigation, type NavItem } from "@/config/navigation";
-import { useSmoothScrollTo } from "@/components/layout/smooth-scroll";
 import { cn } from "@/lib/utils";
 
 function filterItems(query: string): NavItem[] {
@@ -20,7 +19,6 @@ function filterItems(query: string): NavItem[] {
 
 export function CommandPalette() {
   const router = useRouter();
-  const scrollTo = useSmoothScrollTo();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [index, setIndex] = useState(0);
@@ -50,7 +48,7 @@ export function CommandPalette() {
         }
         const el = document.getElementById(id);
         if (el) {
-          scrollTo(el);
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
           history.replaceState(null, "", item.href);
         } else {
           router.push(item.href);
@@ -59,7 +57,7 @@ export function CommandPalette() {
         router.push(item.href);
       }
     },
-    [close, router, scrollTo],
+    [close, router],
   );
 
   useEffect(() => {
@@ -122,7 +120,7 @@ export function CommandPalette() {
         className="relative z-[101] w-full max-w-md overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-soft)]"
       >
         <h2 id="command-palette-title" className="sr-only">
-          Jump to section
+          Jump to
         </h2>
         <div className="flex items-center gap-2 border-b border-border px-3">
           <Search className="size-4 shrink-0 text-muted-foreground" aria-hidden />

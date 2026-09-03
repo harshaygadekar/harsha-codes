@@ -18,10 +18,7 @@ export default async function NewPostPage() {
   }
 
   return (
-    <AdminShell
-      title="New post"
-      description="Write freely. Save drafts often. Publish when it feels finished."
-    >
+    <AdminShell title="new post" description="write, then publish when it's ready">
       <PostForm mode="create" />
     </AdminShell>
   );

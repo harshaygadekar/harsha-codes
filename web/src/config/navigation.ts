@@ -2,80 +2,46 @@ export interface NavItem {
   id: string;
   href: string;
   label: string;
-  /** Shown in sticky header */
-  inHeader?: boolean;
   keywords?: string[];
 }
 
 /**
- * Order matches page section flow:
- * Hero → Experience → Projects → Tech → Education → GitHub → Connect → Contact
+ * Site map for the command palette (⌘K).
  */
 export const navigation: NavItem[] = [
   {
-    id: "hero",
-    href: "/#hero",
+    id: "home",
+    href: "/",
     label: "Home",
-    inHeader: true,
-    keywords: ["top", "about", "intro"],
+    keywords: ["top", "about", "index", "harsha"],
   },
   {
-    id: "experience",
-    href: "/#experience",
-    label: "Experience",
-    inHeader: true,
-    keywords: ["work", "nokia", "job"],
+    id: "work",
+    href: "/work",
+    label: "Work",
+    keywords: ["experience", "nokia", "job", "research", "school"],
   },
   {
     id: "projects",
-    href: "/#projects",
+    href: "/projects",
     label: "Projects",
-    inHeader: true,
-    keywords: ["portfolio", "work", "code", "research"],
-  },
-  {
-    id: "tech",
-    href: "/#tech",
-    label: "Tech stack",
-    keywords: ["skills", "tools", "backend", "ai", "stack"],
-  },
-  {
-    id: "education",
-    href: "/#education",
-    label: "Education",
-    keywords: ["school", "degree", "mca", "bca"],
-  },
-  {
-    id: "github",
-    href: "/#github",
-    label: "GitHub",
-    keywords: ["activity", "repos", "contributions"],
-  },
-  {
-    id: "social",
-    href: "/#social",
-    label: "Connect",
-    keywords: ["social", "links", "github", "linkedin"],
-  },
-  {
-    id: "contact",
-    href: "/#contact",
-    label: "Contact",
-    inHeader: true,
-    keywords: ["email", "hire", "message", "form"],
+    keywords: ["building", "code", "raguard", "verifyai"],
   },
   {
     id: "writing",
     href: "/writing",
     label: "Writing",
-    inHeader: true,
     keywords: ["blog", "notes", "articles", "posts"],
+  },
+  {
+    id: "contact",
+    href: "/contact",
+    label: "Contact",
+    keywords: ["email", "hire", "hello", "message", "form"],
   },
 ];
 
-export const headerNav = navigation.filter((n) => n.inHeader);
+export const headerNav = navigation;
 
-/** Section ids observed by scrollspy (in-page only). */
-export const scrollSectionIds = navigation
-  .filter((n) => n.href.startsWith("/#"))
-  .map((n) => n.id);
+/** Kept so older scroll-spy imports don't break. Homepage is no longer a long-scroll page. */
+export const scrollSectionIds: string[] = [];

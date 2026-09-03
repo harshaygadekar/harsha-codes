@@ -75,17 +75,24 @@ function ExperienceRow({
             transition={{ duration: reduce ? 0.15 : 0.32, ease: easeOut }}
             className="overflow-hidden"
           >
-            <ul className="mt-3 space-y-2.5 text-[14px] leading-relaxed text-foreground/80 sm:text-[15px] sm:leading-7">
-              {job.highlights.map((h) => (
-                <li key={h} className="flex gap-2.5">
-                  <span
-                    className="mt-[0.55em] size-1 shrink-0 rounded-full bg-muted-foreground/50"
-                    aria-hidden
-                  />
-                  <span>{h}</span>
-                </li>
-              ))}
-            </ul>
+            {/* Single summary paragraph when one highlight; bullets only for multi-point lists */}
+            {job.highlights.length === 1 ? (
+              <p className="mt-3 max-w-2xl text-[14px] leading-relaxed text-foreground/80 sm:text-[15px] sm:leading-7">
+                {job.highlights[0]}
+              </p>
+            ) : (
+              <ul className="mt-3 space-y-2.5 text-[14px] leading-relaxed text-foreground/80 sm:text-[15px] sm:leading-7">
+                {job.highlights.map((h) => (
+                  <li key={h} className="flex gap-2.5">
+                    <span
+                      className="mt-[0.55em] size-1 shrink-0 rounded-full bg-muted-foreground/50"
+                      aria-hidden
+                    />
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
 
             {job.technologies.length > 0 ? (
               <div className="mt-4 flex flex-wrap gap-1.5">
